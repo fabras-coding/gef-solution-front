@@ -1,6 +1,6 @@
 <!-- Topo -->
 <nav class="navbar navbar-dark sticky-top bg-green flex-md-nowrap p-0">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" style="color: #f5f5f5;" > Grupo Espírita Fraterniadade</a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" [routerLink]="'inicio'"  style="color: #f5f5f5;" > Grupo Espírita Fraterniadade</a>
 
 </nav>
 <!-- Fim topo -->
@@ -18,7 +18,7 @@
         <ul class="nav flex-column">
           
           <li class="nav-item">
-             <a class="nav-link item-menu" href="#"> <i  class="fas fa-pills space"></i> Novo medicamento</a>
+             <a class="nav-link item-menu" [routerLink]="'novo-medicamento'"> <i  class="fas fa-pills space"></i> Novo medicamento</a>
             
           </li>
           <li class="nav-item">
@@ -29,7 +29,7 @@
       </div>
     </nav> 
     <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 ">
-      <!-- <router-outlet></router-outlet> -->
+      <router-outlet></router-outlet>
     </main>
 
   </div>

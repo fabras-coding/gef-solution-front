@@ -9,7 +9,13 @@ export class InicioComponent implements OnInit {
 
   constructor() { }
 
+  usuario: string ="Fulaninho da Silva";
+  notificacoes: number = 2;
+
+    
   ngOnInit() {
+
+
   }
 
 }
