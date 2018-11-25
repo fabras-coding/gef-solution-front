@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-primary">
+      
+        <div class="row">
+            <div class="col-md-6">
+              
+                <label>Tipo</label>
+                <select id="ddlTipo" class="form-control select2 select2-hidden-accessible" style="width: 20%;" tabindex="-1" aria-hidden="true">
+                  <option>Selecione...</option>
+                  <option>Fitoterápico</option>
+                  <option>Homeopático</option>
+                  <option>Atopático</option>
+                </select>
+
+              </div>
+
+              <div class="col-md-6">
+                <label>Medicamento</label>
+                <select id="ddlMedicamento" class="form-control select2 select2-hidden-accessible" style="width: 50%;" tabindex="-1" aria-hidden="true">
+                  <option>Selecione...</option>
+                  <option>Aceclofenaco</option>
+                  <option>Biozatin</option>
+                  <option>Captopril</option>
+                  <option>Dipirona</option>
+                  <option>Dipropam</option>
+                  <option>Efedrin</option>
+                  <option>Famox</option>
+                </select>
+
+              </div>
+                <label>Via de administração</label>
+                <select id="ddlViaAdministracao" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                  <option>Selecione...</option>
+                  <option>Oral</option>
+                  <option>Nasal</option>
+                  <option>Tópico</option>
+                </select>
+
+                <label>Unidade de medida</label>
+                <select id="ddlUnidadeMedida" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                  <option>Selecione...</option>
+                  <option>Miligramas</option>
+                  <option>Mililitros</option>
+                  <option>Comprimido</option>
+                  
+                </select>
+
+                <label>Estoque crítico</label>
+                
+                <input id="numberQtde" type="number" class="form-control" placeholder="Quantidade">
+
+                <label>Observação</label>
+                <textarea id="txtObservacao" class="form-control textarea" rows="3" placeholder="Digite..."></textarea>
+              
+                <br><br>
+                <div class="box-footer">
+                    <a id="btnEntradaEstoque" href="../../paginas/farmacia/entrada_estoque.html"><button class="btn btn-success pull-right">Entrada de Estoque</button></a>
+                    <button id="btnCadastrar" type="submit" class="btn btn-primary">Cadastrar</button>
+                    <button id="modal-medicamento-existente-trigger" class="btn btn-success" data-toggle="modal" data-target="#modal-medicamento-existente" style="display: none"></button>
+                    <button id="modal-cadastro-sucesso" data-toggle="modal" data-target="#modal-cadastrado-sucesso" style="display: none"></button>
+                  </div> 
+
+            </div>
+
+    </div>
+  </div>
+</div>
+
+

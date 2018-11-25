@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing-module';
 import { InicioModule } from './inicio/inicio.module';
 import { AppBootstrapModule } from './share/app-bootstrap.module';
+import {CommonModule} from '@angular/common';
 
 
 
@@ -19,6 +20,7 @@ import { AppBootstrapModule } from './share/app-bootstrap.module';
     HttpModule,
     AppRoutingModule,
     InicioModule,
+    CommonModule,
     AppBootstrapModule
     
   ],
