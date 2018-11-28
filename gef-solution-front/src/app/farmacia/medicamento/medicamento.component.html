@@ -1,70 +1,89 @@
 <div class="row">
   <div class="col-md-12">
+    <h2>Cadastro de Medicamentos</h2>
     <div class="box box-primary">
-      
-        <div class="row">
-            <div class="col-md-6">
-              
-                <label>Tipo</label>
-                <select id="ddlTipo" class="form-control select2 select2-hidden-accessible" style="width: 20%;" tabindex="-1" aria-hidden="true">
-                  <option>Selecione...</option>
-                  <option>Fitoterápico</option>
-                  <option>Homeopático</option>
-                  <option>Atopático</option>
-                </select>
 
-              </div>
+      <div class="row">
+        <div class="espaco-form-group">
+          <div class="col-md-3">
 
-              <div class="col-md-6">
-                <label>Medicamento</label>
-                <select id="ddlMedicamento" class="form-control select2 select2-hidden-accessible" style="width: 50%;" tabindex="-1" aria-hidden="true">
-                  <option>Selecione...</option>
-                  <option>Aceclofenaco</option>
-                  <option>Biozatin</option>
-                  <option>Captopril</option>
-                  <option>Dipirona</option>
-                  <option>Dipropam</option>
-                  <option>Efedrin</option>
-                  <option>Famox</option>
-                </select>
+            <label>Tipo</label>
+            <select id="ddlTipo" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option>Selecione...</option>
+              <option>Fitoterápico</option>
+              <option>Homeopático</option>
+              <option>Atopático</option>
+            </select>
 
-              </div>
-                <label>Via de administração</label>
-                <select id="ddlViaAdministracao" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                  <option>Selecione...</option>
-                  <option>Oral</option>
-                  <option>Nasal</option>
-                  <option>Tópico</option>
-                </select>
+          </div>
 
-                <label>Unidade de medida</label>
-                <select id="ddlUnidadeMedida" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                  <option>Selecione...</option>
-                  <option>Miligramas</option>
-                  <option>Mililitros</option>
-                  <option>Comprimido</option>
-                  
-                </select>
+          <div class="col-md-7">
+            <label>Medicamento</label>
+            <select id="ddlMedicamento" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option>Selecione...</option>
+              <option>Aceclofenaco</option>
+              <option>Biozatin</option>
+              <option>Captopril</option>
+              <option>Dipirona</option>
+              <option>Dipropam</option>
+              <option>Efedrin</option>
+              <option>Famox</option>
+            </select>
 
-                <label>Estoque crítico</label>
-                
-                <input id="numberQtde" type="number" class="form-control" placeholder="Quantidade">
+          </div>
+        </div>
 
-                <label>Observação</label>
-                <textarea id="txtObservacao" class="form-control textarea" rows="3" placeholder="Digite..."></textarea>
-              
-                <br><br>
-                <div class="box-footer">
-                    <a id="btnEntradaEstoque" href="../../paginas/farmacia/entrada_estoque.html"><button class="btn btn-success pull-right">Entrada de Estoque</button></a>
-                    <button id="btnCadastrar" type="submit" class="btn btn-primary">Cadastrar</button>
-                    <button id="modal-medicamento-existente-trigger" class="btn btn-success" data-toggle="modal" data-target="#modal-medicamento-existente" style="display: none"></button>
-                    <button id="modal-cadastro-sucesso" data-toggle="modal" data-target="#modal-cadastrado-sucesso" style="display: none"></button>
-                  </div> 
 
+        
+
+            <div class="col-md-3 espaco-form-group">
+              <label>Via de administração</label>
+              <select id="ddlViaAdministracao" class="form-control" tabindex="-1" aria-hidden="true">
+                <option>Selecione...</option>
+                <option>Oral</option>
+                <option>Nasal</option>
+                <option>Tópico</option>
+              </select>
             </div>
 
+            <div class="col-md-3 espaco-form-group">
+              <label>Unidade de medida</label>
+              <select id="ddlUnidadeMedida" class="form-control select2 select2-hidden-accessible" style="width: 100%;"
+                tabindex="-1" aria-hidden="true">
+                <option>Selecione...</option>
+                <option>Miligramas</option>
+                <option>Mililitros</option>
+                <option>Comprimido</option>
+
+              </select>
+            </div>
+
+            <div class="col-md-2 espaco-form-group">
+              <label>Estoque crítico</label>
+              <input id="numberQtde" type="number" class="form-control" placeholder="Quantidade">
+            </div>
+
+
+        <div class="espaco-form-group">
+
+          <div class="col-md-12">
+            <label>Observação</label>
+            <textarea id="txtObservacao" class="form-control textarea" rows="3" placeholder="Digite..."></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-12 espaco-form-group">
+          <div class="box-footer">
+            <a id="btnEntradaEstoque" onclick="alert('alou')"><button class="btn btn-success pull-right">Entrada
+                de Estoque</button></a>
+            <button id="btnCadastrar" type="submit" class="btn btn-primary">Cadastrar</button>
+            <button id="modal-medicamento-existente-trigger" class="btn btn-success" data-toggle="modal" data-target="#modal-medicamento-existente"
+              style="display: none"></button>
+            <button id="modal-cadastro-sucesso" data-toggle="modal" data-target="#modal-cadastrado-sucesso" style="display: none"></button>
+          </div>
+        </div>
+
+
+      </div>
     </div>
   </div>
-</div>
-
-

@@ -1,7 +1,9 @@
 .box.box-primary {
     border-top-color: #3c8dbc;
+    
 }
 .box {
+    margin-top: 20px;
     position: relative;
     border-radius: 3px;
     background: #ffffff;
@@ -17,5 +19,10 @@
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     padding: 10px;
+}
+
+.espaco-form-group{
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
 }
 
