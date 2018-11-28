@@ -14,6 +14,10 @@ imports:[ RouterModule.forRoot([
     {
         path: 'novo-medicamento',
         loadChildren: '../app/farmacia/medicamento/medicamento.module#MedicamentoModule'
+    },
+    {
+        path: 'entrada-estoque',
+        loadChildren: '../app/farmacia/entrada-estoque/entrada-estoque.module#EntradaEstoqueModule'
     }
 
 
