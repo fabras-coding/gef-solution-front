@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { InicioModule } from './inicio/inicio.module';
 import { AppBootstrapModule } from './share/app-bootstrap.module';
 import {CommonModule} from '@angular/common';
+import { UtilityService } from 'src/service/utility.service';
 
 
 
@@ -13,7 +14,7 @@ import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     
     
   ],
@@ -26,7 +27,7 @@ import {CommonModule} from '@angular/common';
     AppBootstrapModule
     
   ],
-  providers: [],
+  providers: [UtilityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

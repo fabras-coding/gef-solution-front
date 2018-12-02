@@ -6,8 +6,178 @@
       <div class="row">
         <div class="espaco-form-group">
 
+          <div class="col-md-2">
+            <label class="">Código Interno</label>
+            <input class="form-control" type="text" disabled>
+          </div>
+
+          <div class="col-md-3">
+            <label class="">Quantidade a dar entrada</label>
+            <input class="form-control" type="number" enabled="false">
+          </div>
+
+          <div class="col-md-3">
+            <label class="">Unidade de Medida</label>
+            <input class="form-control" type="text" disabled>
+          </div>
+
+
+        </div>
+        <div class="espaco-form-group">
+          <div class="col-md-6 espaco-form-group">
+            <label>Medicamento</label>
+            <select id="ddlMedicamento" class="form-control " style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option>Selecione...</option>
+              <option>Aceclofenaco</option>
+              <option>Biozatin</option>
+              <option>Captopril</option>
+              <option>Dipirona</option>
+              <option>Dipropam</option>
+              <option>Efedrin</option>
+              <option>Famox</option>
+            </select>
+          </div>
+          <div class="col-md-6"></div>
         </div>
 
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+        <div class="box">
+          <div class="box-header">
+            <div class="box-title">
+              Detalhes
+            </div>
+
+            <div class="box-body">
+              <div id="table_estoque" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                  <div class="col-sm-6 col-md-6">
+                    <div class="dataTabçes_length" id="table_estoque_length">
+                      <label>Mostrar
+                        <select name="table_estoque_length" aria-controls="table_estoque" class="form-control input-sm">
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select> resultados
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-6">
+                    <div class="dataTables_filter">
+                      <label>Procurar: </label>
+                      <input type="search" class="form-control ">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="box">
+      <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-lg-12">
+          <table id="table_estoque" class="table table-bordered dataTable" role="grid">
+            <thead>
+              <tr role="row">
+                <th>Quantidade</th>
+                <th>Unidade Medida</th>
+                <th>Data de Vencimento</th>
+                <th>Procedência</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" class="odd">
+                <td class="sorting_1">5</td>
+                <td>Mililitros</td>
+                <td>25/08/2018</td>
+                <td>Doação Centro ABC</td>
+              </tr>
+              <tr role="row" class="even">
+                <td class="sorting_1">2</td>
+                <td>Miligramas</td>
+                <td>22/11/2018</td>
+                <td>Doação Centro Jundiaí</td>
+              </tr>
+
+              <tr role="row" class="odd">
+                <td class="sorting_1">2</td>
+                <td>Comprimidos</td>
+                <td>22/02/2019</td>
+                <td>Doação Teste</td>
+              </tr>
+
+              <tr role="row" class="even">
+                <td class="sorting_1">2</td>
+                <td>Mililitros</td>
+                <td>02/01/2019</td>
+                <td>Doação de Colegas</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th rowspan="1" colspan="1">Quantidade:</th>
+                <th rowspan="1" colspan="1"></th>
+                <th rowspan="1" colspan="1"></th>
+                <th rowspan="1" colspan="1">
+                  <button id="btnAddMedicamento" type="button" class="btn btn-primary pull-right" (click)="openModal(templateMedicamento)">Adicionar
+                    Medicamento</button>
+
+                  <ng-template #templateMedicamento>
+
+                    <div class="modal-header">
+
+                      <h4 class="modal-title">Informar Vencimentos </h4>
+                      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                        <span aria-hidden="true">×</span>
+                      </button>
+
+
+                    </div>
+                    <div class="modal-body">
+                      <p>Por favor, informe o vencimento da(s) unidade(s) informada(s): </p>
+
+                      <div class="form-check">
+                        <input id="chkTodas" type="checkbox" class="form-check-input">
+                        <label class="form-check-label" for="exampleCheck1">O mesmo para todas</label>
+                      </div>
+
+                      <p><input id="data1" class="form-control" type="date"> </p>
+                      <p><input id="data2" class="form-control" type="date"> </p>
+                      <p><input id="data3" class="form-control" type="date"> </p>
+                      <p><input id="data4" class="form-control" type="date"> </p>
+                      <p><input id="data5" class="form-control" type="date"> </p>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button id="fechaModalVencimento" type="button" class="btn btn-default pull-left" (click)="closeModal()">Fechar</button>
+                      <button id="btnConfirmar" class="btn btn-primary">Confirmar</button>
+                    </div>
+
+                  </ng-template>
+                </th>
+              </tr>
+            </tfoot>
+
+          </table>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <button type="submit" class="btn btn-primary pull-right">Cadastrar</button>
+        <button class="btn btn-red pull-left">Voltar</button>
       </div>
 
     </div>

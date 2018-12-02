@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { UtilityService } from 'src/service/utility.service';
 
 @Component({
   selector: 'app-entrada-estoque',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntradaEstoqueComponent implements OnInit {
 
-  constructor() { }
+  constructor(private util:UtilityService) { 
+
+    
+  }
 
   ngOnInit() {
+  }
+
+  openModal( template: TemplateRef<any>){
+    this.util.openModal(template);
+  }
+
+  closeModal(){
+    this.util.closeModal();
   }
 
 }

@@ -16,7 +16,7 @@ export class InicioComponent implements OnInit {
   jstoday = '';
   
  constructor(){
-  this.jstoday = formatDate(this.today, 'dd-MM-yyyy', 'en-US')  ;
+  this.jstoday = formatDate(this.today, 'dd/MM/yyyy', 'en-US')  ;
  }
 
   ngOnInit() {
