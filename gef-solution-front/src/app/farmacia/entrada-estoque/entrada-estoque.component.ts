@@ -1,5 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { UtilityService } from 'src/service/utility.service';
+import { FarmaciaApiService } from '../farmacia.service';
+import { Medicamento } from '../medicamento/medicamento-type';
+import { Response } from '@angular/http';
 
 @Component({
   selector: 'app-entrada-estoque',
@@ -8,12 +11,27 @@ import { UtilityService } from 'src/service/utility.service';
 })
 export class EntradaEstoqueComponent implements OnInit {
 
-  constructor(private util:UtilityService) { 
+
+   medicamentos: Medicamento[] =[];
+
+  constructor(private util:UtilityService, protected famarciaService: FarmaciaApiService) { 
 
     
   }
 
   ngOnInit() {
+
+      this.listarMedicamentos();
+      
+  }
+
+  listarMedicamentos(){
+    this.famarciaService.listarMedicamentos()
+    .subscribe((response: Response) => {
+        this.medicamentos = response.json();
+    });
+
+    
   }
 
   openModal( template: TemplateRef<any>){
@@ -22,6 +40,16 @@ export class EntradaEstoqueComponent implements OnInit {
 
   closeModal(){
     this.util.closeModal();
+  }
+
+  mostraMedicamentos(){
+
+    alert(this.medicamentos.toString() );
+    // this.medicamentos.forEach(element => {
+    //   alert(element.id_medicamento);
+    // });
+
+
   }
 
 }
