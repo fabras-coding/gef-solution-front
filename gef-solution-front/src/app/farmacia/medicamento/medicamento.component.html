@@ -21,13 +21,7 @@
             <label>Medicamento</label>
             <select id="ddlMedicamento" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
               <option>Selecione...</option>
-              <option>Aceclofenaco</option>
-              <option>Biozatin</option>
-              <option>Captopril</option>
-              <option>Dipirona</option>
-              <option>Dipropam</option>
-              <option>Efedrin</option>
-              <option>Famox</option>
+              <option *ngFor="let medicamento of medicamentos">{{medicamento.nomeMedicamento}}</option>
             </select>
 
           </div>

@@ -1,8 +1,23 @@
 export interface Medicamento{
-    id_medicamento: number,
-    nome_medicamento: string,
-    Vencimentos: string[],
-    procedencia: string,
-    quantidade_estoque: number,
-    unidade_medida: string
+    id: number,
+    nomeMedicamento: string,
+    tipoMedicamento: TipoMedicamento,
+    dataCadastro: Date,
+    observacao:string,
+    cadastroCompleto: boolean,
+    ativo: boolean,
+    quantidadeEstoqueCritico: number,
+    nomeAnvisa:string,
+    principioAtivo: PrincipioAtivo
+}
+
+export interface TipoMedicamento{
+    id:number,
+    nome:string,
+    ativo: boolean
+}
+
+export interface PrincipioAtivo{
+    id:number,
+    nome:string
 }

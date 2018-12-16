@@ -9,29 +9,38 @@ export class FarmaciaApiService{
     constructor(private http: Http){}
 
     urlGet :string = "http://www.mocky.io/v2/5c05bbad3300000e27e8133b";
+    urlGetMedicamentos: string = "https://gefwebapi.azurewebsites.net/api/medicamento/";
     
-    listarMedicamentos(): Observable<Response>{
+
+    testeApi(): Observable<Response>{
         return this.http.get(this.urlGet)
-        .pipe(
-          catchError(this.handleError('listarMedicamentos',null))  
-        );
+        // .pipe(
+        //   catchError(this.handleError('testeApi'))  
+        // );
+    }
+
+    listarMedicamentos() : Observable<Response>{
+      return this.http.get(this.urlGetMedicamentos)
+      // .pipe(
+      //   catchError(this.handleError('listarMedicamentos' ))
+      // );
     }
 
     
     
-    private handleError (operation = 'operation', result?: "") {
-    return (error: any): Observable<Response> => {
+  //   private handleError (operation = 'operation', result?: "") {
+  //   return (error: any): Observable<Response> => {
    
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+  //     // TODO: send the error to remote logging infrastructure
+  //     console.error('Ocorreu um erro:' + error); // log to console instead
    
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
+  //     // TODO: better job of transforming error for user consumption
+  //     console.log(`${operation} failed: ${error.message}`);
       
    
-      // Let the app keep running by returning an empty result.
-      return null; ;
-    };
-  }
+  //     // Let the app keep running by returning an empty result.
+  //     return null; ;
+  //   };
+  // }
 
 }

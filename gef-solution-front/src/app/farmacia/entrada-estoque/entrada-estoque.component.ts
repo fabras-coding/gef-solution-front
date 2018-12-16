@@ -21,18 +21,18 @@ export class EntradaEstoqueComponent implements OnInit {
 
   ngOnInit() {
 
-      this.listarMedicamentos();
+      //this.listarMedicamentos();
       
   }
 
-  listarMedicamentos(){
-    this.famarciaService.listarMedicamentos()
-    .subscribe((response: Response) => {
-        this.medicamentos = response.json();
-    });
+  // listarMedicamentos(){
+  //   this.famarciaService.testeApi()
+  //   .subscribe((response: Response) => {
+  //       this.medicamentos = response.json();
+  //   });
 
     
-  }
+  // }
 
   openModal( template: TemplateRef<any>){
     this.util.openModal(template);
@@ -42,14 +42,10 @@ export class EntradaEstoqueComponent implements OnInit {
     this.util.closeModal();
   }
 
-  mostraMedicamentos(){
+  // mostraMedicamentos(){
 
-    alert(this.medicamentos.toString() );
-    // this.medicamentos.forEach(element => {
-    //   alert(element.id_medicamento);
-    // });
-
-
-  }
+  //   alert(this.medicamentos.toString() );
+    
+  // }
 
 }
