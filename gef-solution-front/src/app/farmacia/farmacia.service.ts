@@ -9,7 +9,7 @@ export class FarmaciaApiService{
     constructor(private http: Http){}
 
     urlGet :string = "http://www.mocky.io/v2/5c05bbad3300000e27e8133b";
-    urlGetMedicamentos: string = "https://gefwebapi.azurewebsites.net/api/medicamento/";
+    urlGetMedicamentos: string = "http://www.mocky.io/v2/5c183cee2f00005700af0ee9";
     
 
     testeApi(): Observable<Response>{
