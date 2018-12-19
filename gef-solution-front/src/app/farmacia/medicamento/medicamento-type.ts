@@ -21,3 +21,10 @@ export interface PrincipioAtivo{
     id:number,
     nome:string
 }
+
+export interface Estoque{
+    id:number,
+    medicamento: Medicamento,
+    quantidade: number,
+    vencimento: Date
+}

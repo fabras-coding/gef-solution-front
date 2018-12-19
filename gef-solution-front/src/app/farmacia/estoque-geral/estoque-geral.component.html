@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Visão Geral de Estoque</h2>
+    <div class="box box-primary">
+
+      <div class="row">
+        <div class="espaco-form-group">
+
+          <div class="col-md-12 col-sm-12 col-lg-12">
+            <table id="table_estoque" class="table table-bordered dataTable" role="grid"  >
+              <thead>
+                <tr role="row">
+                    <th>Nome Medicamento</th>
+                  <th>Quantidade</th>
+                  <th>Data de Cadastro</th>
+                  <th>Data de Vencimento</th>
+                  <th>Procedência</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let estoque of itensEstoque" role="row" class="odd" >
+                  <td>{{estoque.medicamento.nomeMedicamento}}</td>
+                  <td>{{estoque.quantidade}}</td>
+                  <td>{{estoque.medicamento.dataCadastro}}</td>
+                  <td>{{estoque.vencimento}}</td>
+                  <td>{{estoque.medicamento.observacao}}</td>
+                </tr>
+                
+              </tbody>
+              
+  
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

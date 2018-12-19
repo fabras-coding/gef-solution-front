@@ -21,18 +21,10 @@ export class EntradaEstoqueComponent implements OnInit {
 
   ngOnInit() {
 
-      //this.listarMedicamentos();
+     
       
   }
-
-  // listarMedicamentos(){
-  //   this.famarciaService.testeApi()
-  //   .subscribe((response: Response) => {
-  //       this.medicamentos = response.json();
-  //   });
-
-    
-  // }
+   
 
   openModal( template: TemplateRef<any>){
     this.util.openModal(template);
@@ -41,11 +33,5 @@ export class EntradaEstoqueComponent implements OnInit {
   closeModal(){
     this.util.closeModal();
   }
-
-  // mostraMedicamentos(){
-
-  //   alert(this.medicamentos.toString() );
-    
-  // }
-
+  
 }

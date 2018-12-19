@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Medicamento } from './medicamento-type';
+import { Medicamento, Estoque } from './medicamento-type';
 import { FarmaciaApiService } from '../farmacia.service';
 import { UtilityService } from 'src/service/utility.service';
 import { Response } from '@angular/http';
@@ -29,5 +29,7 @@ export class MedicamentoComponent implements OnInit {
         this.medicamentos = response.json();
       });
   }
+
+  
 
 }

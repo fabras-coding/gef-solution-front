@@ -18,6 +18,11 @@ imports:[ RouterModule.forRoot([
     {
         path: 'entrada-estoque',
         loadChildren: '../app/farmacia/entrada-estoque/entrada-estoque.module#EntradaEstoqueModule'
+    },
+
+    {
+        path: 'estoque-geral',
+        loadChildren: '../app/farmacia/estoque-geral/estoque-geral.module#EstoqueGeralModule'
     }
 
 
