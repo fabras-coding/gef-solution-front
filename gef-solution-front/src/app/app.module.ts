@@ -7,7 +7,7 @@ import { InicioModule } from './inicio/inicio.module';
 import { AppBootstrapModule } from './share/app-bootstrap.module';
 import {CommonModule} from '@angular/common';
 import { UtilityService } from 'src/service/utility.service';
-import { EstoqueGeralComponent } from './farmacia/estoque-geral/estoque-geral.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -21,6 +21,7 @@ import { EstoqueGeralComponent } from './farmacia/estoque-geral/estoque-geral.co
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpModule,
     AppRoutingModule,
     InicioModule,
