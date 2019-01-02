@@ -3,7 +3,7 @@ export class ItemEstoque{
     unidadeMedida: string;
     idMedicamento: number;
     nomeMedicamento: string;
-    vencimento: Date;
+    vencimento: string;
     procedencia: string;    
 
 }

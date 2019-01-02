@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Medicamento, Estoque } from './medicamento-type';
 import { FarmaciaApiService } from '../farmacia.service';
 import { UtilityService } from 'src/service/utility.service';
@@ -28,6 +28,15 @@ export class MedicamentoComponent implements OnInit {
       .subscribe((response: Response) =>{
         this.medicamentos = response.json();
       });
+  }
+
+  
+  openModal( template: TemplateRef<any>){
+    this.util.openModal(template);
+  }
+
+  closeModal(){
+    this.util.closeModal();
   }
 
   

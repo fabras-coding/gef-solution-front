@@ -68,9 +68,8 @@
 
         <div class="col-md-12 espaco-form-group">
           <div class="box-footer">
-            <a id="btnEntradaEstoque" onclick="alert('alou')"><button class="btn btn-success pull-right">Entrada
-                de Estoque</button></a>
-            <button id="btnCadastrar" type="submit" class="btn btn-primary">Cadastrar</button>
+            <a id="btnEntradaEstoque" ><button class="btn btn-success pull-right"  (click)="openModal(templateMedicamento)">Ativar Medicamento</button></a>
+            
             <button id="modal-medicamento-existente-trigger" class="btn btn-success" data-toggle="modal" data-target="#modal-medicamento-existente"
               style="display: none"></button>
             <button id="modal-cadastro-sucesso" data-toggle="modal" data-target="#modal-cadastrado-sucesso" style="display: none"></button>
@@ -81,3 +80,27 @@
       </div>
     </div>
   </div>
+  </div>
+
+  <ng-template #templateMedicamento>
+
+    <div class="modal-header">
+
+      <h4 class="modal-title">Confirmação </h4>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">×</span>
+      </button>
+
+
+    </div>
+    <div class="modal-body">
+      <h3 style="text-align: center">Deseja avançar para entrada em estoque? </h3>
+      <p style="text-align: center">(O medicamento será ativado no sistema independente da decisão)</p>
+
+    </div>
+    <div class="modal-footer">
+      <button id="fechaModalVencimento" type="button" class="btn btn-default pull-left" (click)="closeModal()">Não</button>
+      <a id="btnConfirmar" class="btn btn-primary" [routerLink]="'../entrada-estoque'" >Sim</a>
+    </div>
+
+  </ng-template>
