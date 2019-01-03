@@ -12,8 +12,8 @@ export interface Medicamento{
 }
 
 export interface TipoMedicamento{
-    id:number,
-    nome:string,
+    idTipoMedicamento:number,
+    nomeTipoMedicamento:string,
     ativo: boolean
 }
 
@@ -27,4 +27,14 @@ export interface Estoque{
     medicamento: Medicamento,
     quantidade: number,
     vencimento: Date
+}
+
+export interface ViaAdministracao{
+    idViaAdministracao: number,
+    descricaoViaAdministracao: string
+}
+
+export interface UnidadeMedida{
+    idUnidadeMedida: number,
+    descricaoUnidadeMedida: string
 }

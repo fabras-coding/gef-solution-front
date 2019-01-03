@@ -10,9 +10,7 @@
             <label>Tipo</label>
             <select id="ddlTipo" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
               <option>Selecione...</option>
-              <option>Fitoterápico</option>
-              <option>Homeopático</option>
-              <option>Atopático</option>
+              <option *ngFor="let tipoMedicamento of tipoMedicamentos" value="{{tipoMedicamento.idTipoMedicamento}}" >{{tipoMedicamento.nomeTipoMedicamento}} </option>
             </select>
 
           </div>
@@ -21,7 +19,7 @@
             <label>Medicamento</label>
             <select id="ddlMedicamento" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
               <option>Selecione...</option>
-              <option *ngFor="let medicamento of medicamentos">{{medicamento.nomeMedicamento}}</option>
+              <option *ngFor="let medicamento of medicamentos" value="{{medicamento.id}}" >{{medicamento.nomeMedicamento}}</option>
             </select>
 
           </div>
@@ -34,9 +32,7 @@
               <label>Via de administração</label>
               <select id="ddlViaAdministracao" class="form-control" tabindex="-1" aria-hidden="true">
                 <option>Selecione...</option>
-                <option>Oral</option>
-                <option>Nasal</option>
-                <option>Tópico</option>
+                <option *ngFor="let viaAdministracao of viasAdministracao" value="{{viaAdministracao.idViaAdministracao}}">{{viaAdministracao.descricaoViaAdministracao}}</option>
               </select>
             </div>
 
@@ -45,10 +41,8 @@
               <select id="ddlUnidadeMedida" class="form-control select2 select2-hidden-accessible" style="width: 100%;"
                 tabindex="-1" aria-hidden="true">
                 <option>Selecione...</option>
-                <option>Miligramas</option>
-                <option>Mililitros</option>
-                <option>Comprimido</option>
-
+                <option *ngFor="let unidadeMedida of unidadesMedida" value="{{unidadeMedida.idUnidadeMedida}}">{{unidadeMedida.descricaoUnidadeMedida}}</option>
+                
               </select>
             </div>
 

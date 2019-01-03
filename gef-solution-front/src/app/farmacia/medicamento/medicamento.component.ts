@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Medicamento, Estoque } from './medicamento-type';
+import { Medicamento, Estoque, TipoMedicamento, ViaAdministracao, UnidadeMedida } from './medicamento-type';
 import { FarmaciaApiService } from '../farmacia.service';
 import { UtilityService } from 'src/service/utility.service';
 import { Response } from '@angular/http';
@@ -13,6 +13,9 @@ export class MedicamentoComponent implements OnInit {
 
   
   medicamentos: Medicamento[] =[];
+  tipoMedicamentos: TipoMedicamento[] =[];
+  viasAdministracao: ViaAdministracao[] = [];
+  unidadesMedida: UnidadeMedida[]=[];
 
   constructor(private util:UtilityService, protected famarciaService: FarmaciaApiService) { 
 
@@ -21,6 +24,9 @@ export class MedicamentoComponent implements OnInit {
 
   ngOnInit() {
     this.listarMedicamentos();
+    this.listarTipoMedicamentos();
+    this.listarViaAdministracao();
+    this.listarUnidadesMedida();
   }
 
   listarMedicamentos(){
@@ -28,6 +34,27 @@ export class MedicamentoComponent implements OnInit {
       .subscribe((response: Response) =>{
         this.medicamentos = response.json();
       });
+  }
+
+  listarTipoMedicamentos(){
+    this.famarciaService.listarTipoMedicamentos()
+    .subscribe((response:Response)=>{
+      this.tipoMedicamentos = response.json();
+    });
+  }
+
+  listarViaAdministracao(){
+    this.famarciaService.listarViaAdministracao()
+    .subscribe((response:Response)=>{
+      this.viasAdministracao = response.json();
+    })
+  }
+
+  listarUnidadesMedida(){
+    this.famarciaService.listarUnidadesMedida()
+    .subscribe((response:Response)=>{
+      this.unidadesMedida = response.json();
+    })
   }
 
   

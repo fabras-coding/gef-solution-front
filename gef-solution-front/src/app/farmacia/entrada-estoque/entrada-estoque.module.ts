@@ -5,10 +5,11 @@ import { EntradaEstoqueComponent} from './entrada-estoque.component';
 import { FarmaciaApiService } from '../farmacia.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule} from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
 
-    imports:[EntradaEstoqueRoutingModule, CommonModule, FormsModule],
+    imports:[EntradaEstoqueRoutingModule, CommonModule, FormsModule, RouterModule],
     declarations:[EntradaEstoqueComponent],
     exports:[EntradaEstoqueComponent],
     providers:[FarmaciaApiService]
