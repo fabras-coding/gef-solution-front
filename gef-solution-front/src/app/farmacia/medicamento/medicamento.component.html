@@ -3,6 +3,7 @@
     <h2>Cadastro de Medicamentos</h2>
     <div class="box box-primary">
 
+      <form>
       <div class="row">
         <div class="espaco-form-group">
           <div class="col-md-3">
@@ -19,7 +20,7 @@
             <label>Medicamento</label>
             <select id="ddlMedicamento" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
               <option>Selecione...</option>
-              <option *ngFor="let medicamento of medicamentos" value="{{medicamento.id}}" >{{medicamento.nomeMedicamento}}</option>
+              <option *ngFor="let medicamento of getMedicamentosDesativados()" value="{{medicamento.id}}" >{{medicamento.nomeMedicamento}}</option>
             </select>
 
           </div>
@@ -48,7 +49,7 @@
 
             <div class="col-md-2 espaco-form-group">
               <label>Estoque crítico</label>
-              <input id="numberQtde" type="number" class="form-control" placeholder="Quantidade">
+              <input id="numberQtde" type="number" class="form-control" placeholder="Quantidade" [value]="quantidade" >
             </div>
 
 
@@ -56,13 +57,13 @@
 
           <div class="col-md-12">
             <label>Observação</label>
-            <textarea id="txtObservacao" class="form-control textarea" rows="3" placeholder="Digite..."></textarea>
+            <textarea [(ngModel)]="observacao" id="txtObservacao" class="form-control textarea" rows="3" placeholder="Digite...">{{observacao}}</textarea>
           </div>
         </div>
 
         <div class="col-md-12 espaco-form-group">
           <div class="box-footer">
-            <a id="btnEntradaEstoque" ><button class="btn btn-success pull-right"  (click)="openModal(templateMedicamento)">Ativar Medicamento</button></a>
+            <a id="btnEntradaEstoque" ><button class="btn btn-success pull-right" type="submit" (click)="openModal(templateMedicamento)">Ativar Medicamento</button></a>
             
             <button id="modal-medicamento-existente-trigger" class="btn btn-success" data-toggle="modal" data-target="#modal-medicamento-existente"
               style="display: none"></button>
@@ -72,6 +73,7 @@
 
 
       </div>
+      </form>
     </div>
   </div>
   </div>
@@ -93,7 +95,7 @@
 
     </div>
     <div class="modal-footer">
-      <button id="fechaModalVencimento" type="button" class="btn btn-default pull-left" (click)="closeModal()">Não</button>
+      <button id="fechaModalVencimento"  class="btn btn-default pull-left" (click)="ngOnInit()">Não</button>
       <a id="btnConfirmar" class="btn btn-primary" [routerLink]="'../entrada-estoque'" >Sim</a>
     </div>
 

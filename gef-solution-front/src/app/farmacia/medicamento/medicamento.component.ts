@@ -3,6 +3,7 @@ import { Medicamento, Estoque, TipoMedicamento, ViaAdministracao, UnidadeMedida 
 import { FarmaciaApiService } from '../farmacia.service';
 import { UtilityService } from 'src/service/utility.service';
 import { Response } from '@angular/http';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-medicamento',
@@ -17,23 +18,47 @@ export class MedicamentoComponent implements OnInit {
   viasAdministracao: ViaAdministracao[] = [];
   unidadesMedida: UnidadeMedida[]=[];
 
+
+  quantidade: string= "";
+  observacao: string="";
+
+
   constructor(private util:UtilityService, protected famarciaService: FarmaciaApiService) { 
 
     
   }
 
+ 
   ngOnInit() {
+  
+    this.caralho();
+
     this.listarMedicamentos();
     this.listarTipoMedicamentos();
     this.listarViaAdministracao();
     this.listarUnidadesMedida();
+    this.closeModal();
+    
   }
 
+  caralho(){
+    var teste1: string= null;
+
+    this.quantidade = teste1;
+    this.observacao= teste1;
+  }
+
+
   listarMedicamentos(){
+    
     this.famarciaService.listarMedicamentos()
       .subscribe((response: Response) =>{
         this.medicamentos = response.json();
       });
+  }
+
+  getMedicamentosDesativados() {
+    return this.medicamentos.filter((item) => item.ativo === false);
   }
 
   listarTipoMedicamentos(){
