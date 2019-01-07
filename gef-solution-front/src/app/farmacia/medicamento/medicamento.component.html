@@ -8,7 +8,7 @@
             <div class="col-md-3">
 
               <label>Tipo</label>
-              <select id="ddlTipo" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <select id="ddlTipo" class="form-control" [(ngModel)]="idTipoMedicamento" style="width: 100%;" tabindex="-1" aria-hidden="true">
                 <option>Selecione...</option>
                 <option *ngFor="let tipoMedicamento of tipoMedicamentos" value="{{tipoMedicamento.idTipoMedicamento}}">{{tipoMedicamento.nomeTipoMedicamento}}
                   </option>
@@ -18,8 +18,8 @@
 
             <div class="col-md-7">
               <label>Medicamento</label>
-              <select id="ddlMedicamento" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                <option>Selecione...</option>
+              <select id="ddlMedicamento" class="form-control" [(ngModel)]="idMedicamento" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                <option value="0">Selecione...</option>
                 <option *ngFor="let medicamento of getMedicamentosDesativados()" value="{{medicamento.id}}">{{medicamento.nomeMedicamento}}</option>
               </select>
               <input class="form-control" type="text" id="nomeMedicamento" [(ngModel)]="nomeMedicamento" placeholder="Insira o nome do medicamento a ser inserido" style="display: none">
@@ -31,7 +31,8 @@
               <a id="btnVoltar" style="display: none; color: red"  (click)="voltaMedicamento()" ><br><i class="fas fa-ban">Cancelar</i></a>
             </div>
 
-            <!-- <div class="col-md-3">
+            <!-- Um dia com mais calma eu faço isso direitinho -->
+            <!-- <div class="col-md-3"> 
                 <label for="typeahead-focus">Medicamento</label>
               <input id="typeahead-focus"
                      type="text"
@@ -50,7 +51,7 @@
 
           <div class="col-md-3 espaco-form-group">
             <label>Via de administração</label>
-            <select id="ddlViaAdministracao" class="form-control" tabindex="-1" aria-hidden="true">
+            <select id="ddlViaAdministracao" class="form-control" [(ngModel)]="idViaAdministracao" tabindex="-1" aria-hidden="true">
               <option>Selecione...</option>
               <option *ngFor="let viaAdministracao of viasAdministracao" value="{{viaAdministracao.idViaAdministracao}}">{{viaAdministracao.descricaoViaAdministracao}}</option>
             </select>
@@ -58,16 +59,16 @@
 
           <div class="col-md-3 espaco-form-group">
             <label>Unidade de medida</label>
-            <select id="ddlUnidadeMedida" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+            <select id="ddlUnidadeMedida" class="form-control select2 select2-hidden-accessible" [(ngModel)]="idUnidadeMedida" style="width: 100%;" tabindex="-1" aria-hidden="true">
               <option>Selecione...</option>
-              <option *ngFor="let unidadeMedida of unidadesMedida" value="{{unidadeMedida.idUnidadeMedida}}">{{unidadeMedida.descricaoUnidadeMedida}}</option>
+              <option *ngFor="let unidadeMedida of unidadesMedida"  value="{{unidadeMedida.idUnidadeMedida}}">{{unidadeMedida.descricaoUnidadeMedida}}</option>
 
             </select>
           </div>
 
           <div class="col-md-2 espaco-form-group">
             <label>Estoque crítico</label>
-            <input id="numberQtde" type="number" class="form-control" placeholder="Quantidade" [value]="quantidade">
+            <input id="numberQtde" type="number" class="form-control" placeholder="Quantidade" [(ngModel)]="quantidade" >
           </div>
 
 

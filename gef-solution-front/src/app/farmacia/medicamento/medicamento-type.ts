@@ -48,5 +48,11 @@ export class MedicamentoCad{
     quantidadeEstoqueCritico: number;
     idViaAdministracao: number;
     idUnidadeMedida:number;
+    idPrincipioAtivo:number;
+    
+}
+
+export class ViaAdministracao{
+    idViaAdministracao: number;
     
 }

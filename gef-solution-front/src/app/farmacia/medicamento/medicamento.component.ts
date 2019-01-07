@@ -36,26 +36,32 @@ export class MedicamentoComponent implements OnInit {
 
 
   constructor(private util:UtilityService, protected famarciaService: FarmaciaApiService) { 
-
+    
     
   }
 
  
   ngOnInit() {
   
+    this.iniciaComponentes();
+    
+  }
 
+  iniciaComponentes(){
+
+    
     this.listarMedicamentos();
     this.listarTipoMedicamentos();
     this.listarViaAdministracao();
     this.listarUnidadesMedida();
     this.closeModal();
+
+    
+
     
   }
 
   novoItem(){
-    var teste1: string= null;
-    this.quantidade = 0;
-    this.observacao= teste1;
 
     document.getElementById("ddlMedicamento").style.display = "none";
     document.getElementById("nomeMedicamento").style.display = "block";
@@ -83,8 +89,9 @@ export class MedicamentoComponent implements OnInit {
      medicamentoCad.nomeMedicamento = this.nomeMedicamento;
      medicamentoCad.observacao = this.observacao;
      medicamentoCad.quantidadeEstoqueCritico = this.quantidade;
+     medicamentoCad.idPrincipioAtivo =1 ; //default pra nao dar pau
 
-     
+     this.famarciaService.postJSONMedicamento(medicamentoCad);
   }
 
 
@@ -121,7 +128,7 @@ export class MedicamentoComponent implements OnInit {
     })
   }
 
-
+//TODO: Parte que faz o autoComplete do autoComplete do medicamento funcionar (mas o css nao ficou legal e nao vou checar agora)
   model: any;
 
   @ViewChild('instance') instance: NgbTypeahead;
@@ -138,6 +145,7 @@ export class MedicamentoComponent implements OnInit {
         : this.medicamentos.map(z=> z.nomeMedicamento) .filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
   }
+  //Fim AutoComplete
 
   
   openModal( template: TemplateRef<any>){
