@@ -38,3 +38,15 @@ export interface UnidadeMedida{
     idUnidadeMedida: number,
     descricaoUnidadeMedida: string
 }
+
+
+export class MedicamentoCad{
+    id: number;
+    nomeMedicamento: string;
+    idTipo: number;
+    observacao:string;
+    quantidadeEstoqueCritico: number;
+    idViaAdministracao: number;
+    idUnidadeMedida:number;
+    
+}

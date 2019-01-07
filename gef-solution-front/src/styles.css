@@ -87,3 +87,6 @@ a{
     padding-bottom: 15px !important;
 }
 
+a:hover{
+    cursor: pointer
+}

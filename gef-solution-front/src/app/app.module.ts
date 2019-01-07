@@ -8,6 +8,7 @@ import { AppBootstrapModule } from './share/app-bootstrap.module';
 import {CommonModule} from '@angular/common';
 import { UtilityService } from 'src/service/utility.service';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -27,6 +28,8 @@ import { FormsModule } from '@angular/forms';
     InicioModule,
     CommonModule,
     AppBootstrapModule
+    
+    
     
   ],
   providers: [UtilityService],
