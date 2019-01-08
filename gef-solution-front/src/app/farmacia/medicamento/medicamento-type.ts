@@ -41,18 +41,35 @@ export interface UnidadeMedida{
 
 
 export class MedicamentoCad{
-    id: number;
+    
     nomeMedicamento: string;
-    idTipo: number;
+    tipoMedicamento: TipoMedicamento;
     observacao:string;
+    cadastroCompleto: boolean;
+    ativo: boolean;
     quantidadeEstoqueCritico: number;
-    idViaAdministracao: number;
-    idUnidadeMedida:number;
-    idPrincipioAtivo:number;
+    nomeAnvisa: string;
+    principioAtivo: PrincipioAtivo;
+    viaAdministracao: ViaAdministracao;
+    unidadeMedida: UnidadeMedida;
     
 }
 
 export class ViaAdministracao{
     idViaAdministracao: number;
-    
+}
+
+export class TipoMedicamento{
+    idTipoMedicamento:number;
+}
+
+
+export class UnidadeMedida{
+    idUnidadeMedida: number;
+ 
+}
+
+
+export class PrincipioAtivo{
+    idPrincipioAtivo: number;
 }

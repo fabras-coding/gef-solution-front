@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
-import { Medicamento, TipoMedicamento, ViaAdministracao, UnidadeMedida, MedicamentoCad } from './medicamento-type';
+import { Medicamento, TipoMedicamento, ViaAdministracao, UnidadeMedida, MedicamentoCad, PrincipioAtivo } from './medicamento-type';
 import { FarmaciaApiService } from '../farmacia.service';
 import { UtilityService } from 'src/service/utility.service';
 import { Response } from '@angular/http';
@@ -81,17 +81,31 @@ export class MedicamentoComponent implements OnInit {
 
   cadastrarMedicamento(){
      var medicamentoCad = new MedicamentoCad();
+      
+     var tipoMedicamento = new TipoMedicamento();  
+     tipoMedicamento.idTipoMedicamento = this.idTipoMedicamento;
 
-     medicamentoCad.id = this.idMedicamento;
-     medicamentoCad.idTipo = this.idTipoMedicamento;
-     medicamentoCad.idUnidadeMedida = this.idUnidadeMedida;
-     medicamentoCad.idViaAdministracao = this.idViaAdministracao;
+     var unidadeMedida =  new UnidadeMedida();
+     unidadeMedida.idUnidadeMedida = this.idUnidadeMedida;
+
+     var viaAdministracao = new ViaAdministracao();
+     viaAdministracao.idViaAdministracao = this.idViaAdministracao;
+
+     var principioAtivo = new PrincipioAtivo();
+     principioAtivo.idPrincipioAtivo = 1; // default pra nao dar pau
+
      medicamentoCad.nomeMedicamento = this.nomeMedicamento;
+     medicamentoCad.tipoMedicamento = tipoMedicamento;
      medicamentoCad.observacao = this.observacao;
+     medicamentoCad.cadastroCompleto = true;
+     medicamentoCad.ativo = true;
      medicamentoCad.quantidadeEstoqueCritico = this.quantidade;
-     medicamentoCad.idPrincipioAtivo =1 ; //default pra nao dar pau
+     medicamentoCad.nomeAnvisa = this.nomeMedicamento + " _manual_";
+     medicamentoCad.principioAtivo = principioAtivo;
+     medicamentoCad.viaAdministracao = viaAdministracao;
+     medicamentoCad.unidadeMedida = unidadeMedida;
 
-     this.famarciaService.postJSONMedicamento(medicamentoCad);
+     this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe();
   }
 
 

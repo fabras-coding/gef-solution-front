@@ -46,13 +46,12 @@ export class FarmaciaApiService{
       return this.http.get(this.urlGetUnidadeMedida);
     }
 
-    postJSONMedicamento(medicamento: MedicamentoCad){
+    postJSONMedicamento(medicamento: MedicamentoCad) {
       
       var json = JSON.stringify(medicamento);
       var params = json;
       var headers = new Headers();
 
-      alert(json);
       console.log(json);
       headers.append('Content-Type', 'application/json');
       return this.http.post(this.ulrPostMedicamento, params, {headers : headers});
