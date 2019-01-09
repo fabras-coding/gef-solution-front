@@ -24,6 +24,7 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.4",
     "dateformat": "^3.0.3",
+    "guid-typescript": "^1.0.9",
     "ngx-bootstrap": "^3.1.2",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"

@@ -4,8 +4,9 @@ import { FarmaciaApiService } from '../farmacia.service';
 import { Medicamento } from '../medicamento/medicamento-type';
 import { FormsModule, NgModel } from '@angular/forms'
 import { Response } from '@angular/http';
-import { ItemEstoque } from './item-estoque';
+import { ItemEstoque, MedicamentoEstoque } from './item-estoque';
 import { formatDate } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-entrada-estoque',
@@ -16,6 +17,8 @@ export class EntradaEstoqueComponent implements OnInit {
   
   ngOnInit()  {
     this.closeModal();
+
+    this.testaParametro();
   }
 
 
@@ -25,27 +28,34 @@ export class EntradaEstoqueComponent implements OnInit {
 
    @Input() nomeMedicamento : string;
    
-  constructor(private util:UtilityService, protected famarciaService: FarmaciaApiService) { 
+  constructor(private util:UtilityService, protected famarciaService: FarmaciaApiService, private route: ActivatedRoute) { 
     this.itemEstoque = new ItemEstoque();
     
   }
 
+  testaParametro(){
+    alert(this.route.snapshot.paramMap.get("id"));
+  }
    
-  
-  mostraAsParada(){
-    alert(this.itemEstoque.nomeMedicamento + ";" + this.itemEstoque.procedencia +";" + this.itemEstoque.quantidade +";"+ this.itemEstoque.unidadeMedida + ";" + this.itemEstoque.vencimento);
+  listarMedicamentos(){
+
+    this.famarciaService.listarMedicamentos()
+      .subscribe((response: Response) => {
+        this.medicamentos = response.json();
+      });
+
   }
 
   addItem(){
     
     var novoItem = new ItemEstoque();
+    var medEstoque = new MedicamentoEstoque();
+    medEstoque.id = 3;
+    // adicionar Guid
 
-    novoItem.idMedicamento = this.itemEstoque.idMedicamento;
-    novoItem.nomeMedicamento = this.itemEstoque.nomeMedicamento;
-    novoItem.procedencia = this.itemEstoque.procedencia;
+    novoItem.medicamento = medEstoque;
     novoItem.quantidade = this.itemEstoque.quantidade;
-    novoItem.unidadeMedida = this.itemEstoque.unidadeMedida;
-    novoItem.vencimento = formatDate(this.itemEstoque.vencimento, 'dd/MM/yyyy', 'en-US')  ;
+    novoItem.vencimento = formatDate(this.itemEstoque.vencimento, 'yyyy-MM-dd ', 'en-US')  ;
 
 
     this.itensEstoque.push(novoItem);
@@ -61,6 +71,18 @@ export class EntradaEstoqueComponent implements OnInit {
 
   addMedicamento(){
 
+    this.famarciaService.postJSONItemEstoque(this.itensEstoque[0])
+    .subscribe(
+      data => {
+        alert("funfou");
+      },
+      error => {
+        alert("nao funfou. " + error);
+      }
+    );
+
   }
+
+  
   
 }

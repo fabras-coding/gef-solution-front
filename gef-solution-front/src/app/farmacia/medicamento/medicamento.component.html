@@ -20,7 +20,7 @@
               <label>Medicamento</label>
               <select id="ddlMedicamento" class="form-control" [(ngModel)]="idMedicamento" style="width: 100%;" tabindex="-1" aria-hidden="true">
                 <option value="0">Selecione...</option>
-                <option *ngFor="let medicamento of getMedicamentosDesativados()" value="{{medicamento.id}}">{{medicamento.nomeMedicamento}}</option>
+                <option *ngFor="let medicamento of getMedicamentosFakeWithGuid()" value="{{medicamento.guid}}">{{medicamento.nomeMedicamento}}</option>
               </select>
               <input class="form-control" type="text" id="nomeMedicamento" [(ngModel)]="nomeMedicamento" placeholder="Insira o nome do medicamento a ser inserido" style="display: none">
               
@@ -95,6 +95,7 @@
         
     </div>
   </div>
+  <button type="button" id="modalSucesso" hidden (click)="openModal(templateSucessoMedicamento)"></button>
 </div>
 
 <ng-template #templateMedicamento>
@@ -114,8 +115,29 @@
 
   </div>
   <div class="modal-footer">
-    <button id="fechaModalVencimento" class="btn btn-default pull-left" (click)="cadastrarMedicamento()">Não</button>
-    <a id="btnConfirmar" class="btn btn-primary" [routerLink]="'../entrada-estoque'">Sim</a>
+    <button id="fechaModalVencimento" class="btn btn-default pull-left" (click)="cadastrarMedicamento(false)">Não</button>
+    <button id="btnConfirmar" class="btn btn-primary" (click)="cadastrarMedicamento(true)">Sim</button>
+  </div>
+
+</ng-template>
+
+<ng-template #templateSucessoMedicamento>
+
+  <div class="modal-header">
+
+    <h4 class="modal-title">Sucesso! </h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">×</span>
+    </button>
+
+
+  </div>
+  <div class="modal-body">
+    <h3 style="text-align: center">Medicamento cadastrado com sucesso!</h3>
+    
+  </div>
+  <div class="modal-footer">
+    <button id="fechaModalSucesso" class="btn btn-primary pull-center" (click)="redirecionaMedicamento()">Ok</button>
   </div>
 
 </ng-template>

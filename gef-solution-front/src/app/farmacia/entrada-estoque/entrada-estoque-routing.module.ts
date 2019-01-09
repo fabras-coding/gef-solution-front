@@ -8,6 +8,9 @@ import { EntradaEstoqueComponent } from './entrada-estoque.component';
 
         {
             path: '', component: EntradaEstoqueComponent
+        },
+        {
+            path: ':id', component: EntradaEstoqueComponent
         }
     ])]
 })

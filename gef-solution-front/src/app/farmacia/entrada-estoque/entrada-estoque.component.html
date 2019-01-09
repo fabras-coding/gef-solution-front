@@ -27,6 +27,7 @@
           <div class="col-md-6 espaco-form-group">
             <label>Medicamento</label>
             <select [(ngModel)]="itemEstoque.nomeMedicamento" id="ddlMedicamento" class="form-control " style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option *ngFor="let medicamento of medicamentos" value="{{medicamento.guid}}">{{medicamento.nomeMedicamento}}</option>
               <option>Selecione...</option>
               <option>Aceclofenaco</option>
               <option>Biozatin</option>
@@ -50,7 +51,7 @@
           </div>
           
           <div class="col-md-11"></div>
-          <div class="col-md-1"> <a (click)="addItem()" ><h2><i  class="fas fa-plus-circle"></i></h2> </a></div>
+          <div class="col-md-1"> <a  (click)="addItem()" ><h2><i  class="fas fa-plus-circle"></i></h2> </a></div>
 
       </div>
 
@@ -134,7 +135,7 @@
       </div>
 
       <div class="box-footer">
-        <button type="submit" class="btn btn-primary pull-right" (click)="mostraAsParada()">Finalizar</button>
+        <button type="submit" class="btn btn-primary pull-right" (click)="addMedicamento()">Finalizar</button>
         <button class="btn btn-red pull-left" [routerLink]="'../inicio'" >Voltar</button>
       </div>
 

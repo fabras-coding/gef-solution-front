@@ -1,9 +1,10 @@
 export class ItemEstoque{
+    medicamento: MedicamentoEstoque;
     quantidade: number;
-    unidadeMedida: string;
-    idMedicamento: number;
-    nomeMedicamento: string;
     vencimento: string;
-    procedencia: string;    
 
+}
+
+export class MedicamentoEstoque{
+    id: number;
 }

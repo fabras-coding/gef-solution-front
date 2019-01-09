@@ -3,6 +3,7 @@ import { Http, Response, Headers } from "@angular/http";
 import { Observable } from "rxjs";
 import { MedicamentoCad } from "../farmacia/medicamento/medicamento-type";
 import { catchError} from 'rxjs/operators';
+import { ItemEstoque } from "./entrada-estoque/item-estoque";
 
 @Injectable()
 export class FarmaciaApiService{
@@ -18,14 +19,19 @@ export class FarmaciaApiService{
     urlGetUnidadeMedida: string ="https://gefwebapi.azurewebsites.net/api/unidademedida/";
 
     ulrPostMedicamento: string = "https://gefwebapi.azurewebsites.net/api/Medicamento";
-    
-    
+    urlPostItemEstoque: string= "https://gefwebapi.azurewebsites.net/api/Estoque";
+
+    urlGetMedicamentosFake: string= "http://www.mocky.io/v2/5c36235a3000008b0021b7e5";
 
 
     ///Retorna os medicamentos
     listarMedicamentos() : Observable<Response>{
       return this.http.get(this.urlGetMedicamentos);
       
+    }
+
+    listarMedicamentosFake() : Observable<Response>{
+      return this.http.get(this.urlGetMedicamentosFake);
     }
 
     ///Retorna o estoque
@@ -52,12 +58,23 @@ export class FarmaciaApiService{
       var params = json;
       var headers = new Headers();
 
-      console.log(json);
+     
       headers.append('Content-Type', 'application/json');
       return this.http.post(this.ulrPostMedicamento, params, {headers : headers});
       
 
     }
 
+    postJSONItemEstoque(itemEstoque: ItemEstoque){
+      var json = JSON.stringify(itemEstoque);
+      var params = json;
+      var headers = new Headers();
+
+      console.log(json);
+      
+      headers.append('Content-Type', 'application/json');
+      return this.http.post(this.urlPostItemEstoque, params, {headers : headers});
+
+    }
     
 }
