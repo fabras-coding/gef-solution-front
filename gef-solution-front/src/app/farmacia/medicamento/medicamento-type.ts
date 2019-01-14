@@ -1,7 +1,7 @@
 import { Guid } from "guid-typescript";
 
 export interface Medicamento{
-    guid: Guid,
+    guid: string,
     id: number,
     nomeMedicamento: string,
     tipoMedicamento: TipoMedicamento,
@@ -45,7 +45,7 @@ export interface UnidadeMedida{
 
 export class MedicamentoCad{
     
-    guid: Guid;
+    guid: string;
     nomeMedicamento: string;
     tipoMedicamento: TipoMedicamento;
     observacao:string;

@@ -20,14 +20,14 @@
               <label>Medicamento</label>
               <select id="ddlMedicamento" class="form-control" [(ngModel)]="idMedicamento" style="width: 100%;" tabindex="-1" aria-hidden="true">
                 <option value="0">Selecione...</option>
-                <option *ngFor="let medicamento of getMedicamentosFakeWithGuid()" value="{{medicamento.guid}}">{{medicamento.nomeMedicamento}}</option>
+                <option *ngFor="let medicamento of getMedicamentosDesativados()" value="{{medicamento.guid}}">{{medicamento.nomeMedicamento}}</option>
               </select>
               <input class="form-control" type="text" id="nomeMedicamento" [(ngModel)]="nomeMedicamento" placeholder="Insira o nome do medicamento a ser inserido" style="display: none">
               
 
             </div>
             <div class="col-md-1"> 
-              <a id="btnNaoAchou"  (click)="novoItem()" >Não achou?<i  class="fas fa-plus-circle"></i> </a>
+              <a id="btnNaoAchou" (click)="novoItem()" >Não achou?<i  class="fas fa-plus-circle"></i> </a>
               <a id="btnVoltar" style="display: none; color: red"  (click)="voltaMedicamento()" ><br><i class="fas fa-ban">Cancelar</i></a>
             </div>
 

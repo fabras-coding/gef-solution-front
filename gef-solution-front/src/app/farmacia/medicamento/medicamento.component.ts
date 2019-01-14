@@ -28,15 +28,15 @@ export class MedicamentoComponent implements OnInit {
   unidadesMedida: UnidadeMedida[] = [];
 
 
-  idMedicamento: number;
-  idViaAdministracao: number;
-  idTipoMedicamento: number;
-  idUnidadeMedida: number;
+  idMedicamento: any;
+  idViaAdministracao: any;
+  idTipoMedicamento: any;
+  idUnidadeMedida: any;
   quantidade: number;
   observacao: string = "";
   nomeMedicamento: string = "";
-
-  globalGuid : Guid;
+  isNovoItem: boolean = false;
+  globalGuid: Guid;
 
 
   constructor(private util: UtilityService, protected famarciaService: FarmaciaApiService, private router: Router) {
@@ -47,12 +47,15 @@ export class MedicamentoComponent implements OnInit {
 
     this.iniciaComponentes();
 
+    this.idTipoMedicamento = "Selecione...";
+    this.idMedicamento = "Selecione...";
+    this.idUnidadeMedida = "Selecione...";
+    this.idViaAdministracao = "Selecione...";
   }
 
   iniciaComponentes() {
 
-    //this.listarMedicamentos();
-    this.listarMedicamentosFake();
+    this.listarMedicamentos();
     this.listarTipoMedicamentos();
     this.listarViaAdministracao();
     this.listarUnidadesMedida();
@@ -62,6 +65,7 @@ export class MedicamentoComponent implements OnInit {
 
   novoItem() {
 
+    this.isNovoItem = true;
     document.getElementById("ddlMedicamento").style.display = "none";
     document.getElementById("nomeMedicamento").style.display = "block";
     document.getElementById("btnNaoAchou").style.display = "none";
@@ -70,6 +74,7 @@ export class MedicamentoComponent implements OnInit {
 
   voltaMedicamento() {
 
+    this.isNovoItem = false;
     document.getElementById("ddlMedicamento").style.display = "block";
     document.getElementById("nomeMedicamento").style.display = "none";
     document.getElementById("btnNaoAchou").style.display = "block";
@@ -95,8 +100,13 @@ export class MedicamentoComponent implements OnInit {
     var principioAtivo = new PrincipioAtivo();
     principioAtivo.idPrincipioAtivo = 1; // default pra nao dar pau
 
-    //medicamentoCad.guid = this.globalGuid;
-    medicamentoCad.nomeMedicamento = this.nomeMedicamento;
+    medicamentoCad.guid = this.globalGuid.toString();
+
+    
+    alert(this.medicamentos.filter((item) => item.id ==this.idMedicamento).map(x=> x.nomeMedicamento)[0]);
+    alert(this.idMedicamento);
+
+    medicamentoCad.nomeMedicamento = this.nomeMedicamento == null ? this.medicamentos.filter((item) => item.id ==this.idMedicamento).map(x=> x.nomeMedicamento)[0] : "";
     medicamentoCad.tipoMedicamento = tipoMedicamento;
     medicamentoCad.observacao = this.observacao;
     medicamentoCad.cadastroCompleto = true;
@@ -107,27 +117,62 @@ export class MedicamentoComponent implements OnInit {
     medicamentoCad.viaAdministracao = viaAdministracao;
     medicamentoCad.unidadeMedida = unidadeMedida;
 
+
     if (insereEstoque) {
       this.closeModal();
-      this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
-        data => {
-          this.router.navigate(['entrada-estoque/'+this.globalGuid]);
-        },
-        error => {
-          alert(error);
-        });
+
+      if (this.isNovoItem) {
+
+
+        this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
+          data => {
+            this.router.navigate(['entrada-estoque/' + this.globalGuid]);
+          },
+          error => {
+            alert(error);
+          });
+      }
+      else {
+
+        var idMedicamentoPut = this.idMedicamento;;
+
+        delete medicamentoCad.guid;
+        this.famarciaService.putJSONMedicamento(medicamentoCad, idMedicamentoPut).subscribe(
+          data => {
+            this.router.navigate(['entrada-estoque/' + this.globalGuid]);
+          },
+          error => {
+            alert(error);
+          });
+      }
     }
     else {
 
-      this.closeModal();
-      this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
-        data => {
-          document.getElementById("modalSucesso").click();
+      if (this.isNovoItem) {
+        this.closeModal();
+        this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
+          data => {
+            document.getElementById("modalSucesso").click();
 
-        },
-        error => {
-          alert(error);
-        });
+          },
+          error => {
+            alert(error);
+          });
+      }
+      else{
+
+        delete medicamentoCad.guid;
+        this.famarciaService.putJSONMedicamento(medicamentoCad, this.idMedicamento).subscribe(
+          data => {
+            document.getElementById("modalSucesso").click();
+            
+          },
+          error => {
+            alert(error);
+          });
+      }
+
+
     }
   }
 
@@ -146,16 +191,17 @@ export class MedicamentoComponent implements OnInit {
   }
 
   getMedicamentosDesativados() {
+
     return this.medicamentos.filter((item) => item.ativo === false);
   }
 
-  listarMedicamentosFake(){
-     this.famarciaService.listarMedicamentosFake().subscribe((response: Response) =>{
+  listarMedicamentosFake() {
+    this.famarciaService.listarMedicamentosFake().subscribe((response: Response) => {
       this.medicamentos = response.json();
     })
   }
 
-  getMedicamentosFakeWithGuid(){
+  getMedicamentosFakeWithGuid() {
     return this.medicamentos;
   }
 

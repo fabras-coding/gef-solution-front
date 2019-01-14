@@ -5,8 +5,10 @@ import { Medicamento } from '../medicamento/medicamento-type';
 import { FormsModule, NgModel } from '@angular/forms'
 import { Response } from '@angular/http';
 import { ItemEstoque, MedicamentoEstoque } from './item-estoque';
+
 import { formatDate } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-entrada-estoque',
@@ -14,30 +16,38 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./entrada-estoque.component.css']
 })
 export class EntradaEstoqueComponent implements OnInit {
-  
-  ngOnInit()  {
-    this.closeModal();
 
-    this.testaParametro();
-  }
+  medicamentos: Medicamento[] = [];
+  itensEstoque: ItemEstoque[] = [];
+  itemEstoque: ItemEstoque;
+  idRecebido: string;
+  idMedicamento: number;
+  textoPadrao: string;
 
+  @Input() nomeMedicamento: string;
 
-   medicamentos: Medicamento[] =[];
-   itensEstoque: ItemEstoque[] =[];
-   itemEstoque: ItemEstoque;
-
-   @Input() nomeMedicamento : string;
-   
-  constructor(private util:UtilityService, protected famarciaService: FarmaciaApiService, private route: ActivatedRoute) { 
+  constructor(private util: UtilityService, protected famarciaService: FarmaciaApiService, private route: ActivatedRoute, private router: Router) {
     this.itemEstoque = new ItemEstoque();
-    
+
   }
 
-  testaParametro(){
-    alert(this.route.snapshot.paramMap.get("id"));
+
+  ngOnInit() {
+    this.closeModal();
+    this.idRecebido = this.route.snapshot.paramMap.get("id");
+    this.listarMedicamentos();
+
+    this.textoPadrao = "Selecione...";
+
+    if (this.idRecebido != null) {
+      document.getElementById("ddlMedicamento").setAttribute("disabled", "true");
+    }
+
   }
-   
-  listarMedicamentos(){
+
+
+
+  listarMedicamentos() {
 
     this.famarciaService.listarMedicamentos()
       .subscribe((response: Response) => {
@@ -46,43 +56,87 @@ export class EntradaEstoqueComponent implements OnInit {
 
   }
 
-  addItem(){
-    
+  getMedicamentos() {
+
+    if (this.idRecebido == null) {
+
+      return this.medicamentos.filter((item) => item.ativo === true);
+
+    }
+    else {
+
+      this.idMedicamento = (this.medicamentos.filter((item) => item.guid === this.idRecebido).map(x => x.id))[0];
+      return this.medicamentos.filter((item) => item.guid === this.idRecebido);
+    }
+  }
+
+  addItem() {
+
     var novoItem = new ItemEstoque();
     var medEstoque = new MedicamentoEstoque();
-    medEstoque.id = 3;
-    // adicionar Guid
+    medEstoque.id = this.idMedicamento;
+
 
     novoItem.medicamento = medEstoque;
-    novoItem.quantidade = this.itemEstoque.quantidade;
-    novoItem.vencimento = formatDate(this.itemEstoque.vencimento, 'yyyy-MM-dd ', 'en-US')  ;
+    novoItem.quantidadeEstoque = this.itemEstoque.quantidadeEstoque;
+    novoItem.vencimento = formatDate(this.itemEstoque.vencimento, 'yyyy-MM-dd ', 'en-US');
+    novoItem.procedencia = this.itemEstoque.procedencia;
 
 
     this.itensEstoque.push(novoItem);
   }
 
-  openModal( template: TemplateRef<any>){
+  selectOption(id: number) {
+    this.idMedicamento = id;
+
+  }
+
+  openModal(template: TemplateRef<any>) {
     this.util.openModal(template);
   }
 
-  closeModal(){
+  closeModal() {
     this.util.closeModal();
   }
 
-  addMedicamento(){
+  addMedicamento() {
 
-    this.famarciaService.postJSONItemEstoque(this.itensEstoque[0])
-    .subscribe(
-      data => {
-        alert("funfou");
-      },
-      error => {
-        alert("nao funfou. " + error);
-      }
-    );
+    var finalizou: boolean = false;
+    var controle: number=0;
+
+    //refatorar essa bosta
+    this.itensEstoque.forEach(element => {
+      this.famarciaService.postJSONItemEstoque(element)
+        .subscribe(
+          data => {
+            controle++;
+            if(controle==this.itensEstoque.length)
+            {
+              document.getElementById("modalSucesso").click();
+
+            }
+          },
+          error => {
+            document.getElementById("paragrafoMensagem").innerText = error;
+            document.getElementById("templateMessage").click();
+
+          }
+        );
+
+    });
+
+    if (finalizou) {
+    }
 
   }
 
-  
-  
+
+  redirecionaInicio() {
+    this.closeModal();
+    this.router.navigate(['inicio']);
+  }
+
+
+
+
 }

@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-md-12">
     <h2>Entrada de Estoque</h2>
@@ -6,41 +7,35 @@
       <div class="row">
         <div class="espaco-form-group">
 
-          <div class="col-md-2">
+          <div class="col-md-4">
             <label class="">Código Interno</label>
-            <input class="form-control" type="text" disabled>
+            <input class="form-control" type="text" disabled value="{{idRecebido}}">
           </div>
 
-          <div class="col-md-3">
-            <label class="">Quantidade a dar entrada</label>
-            <input [(ngModel)]="itemEstoque.quantidade" class="form-control" type="number" enabled="false">
-          </div>
+        
 
-          <div class="col-md-3">
-            <label class="">Unidade de Medida</label>
-            <input [(ngModel)]="itemEstoque.unidadeMedida" class="form-control" type="text" disabled>
-          </div>
+          <div class="col-md-7">
+            <label>Medicamento</label>
+            <select [(ngModel)]="textoPadrao" id="ddlMedicamento" (change)="selectOption($event.target.value)" class="form-control " style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option  >Selecione...</option>
+              <option *ngFor="let medicamento of getMedicamentos()"  value="{{medicamento.guid}}" [selected]="idRecebido == medicamento.guid">{{medicamento.nomeMedicamento}}</option>
+              
+              
+            </select>
 
+          </div>
 
         </div>
         <div class="espaco-form-group">
-          <div class="col-md-6 espaco-form-group">
-            <label>Medicamento</label>
-            <select [(ngModel)]="itemEstoque.nomeMedicamento" id="ddlMedicamento" class="form-control " style="width: 100%;" tabindex="-1" aria-hidden="true">
-              <option *ngFor="let medicamento of medicamentos" value="{{medicamento.guid}}">{{medicamento.nomeMedicamento}}</option>
-              <option>Selecione...</option>
-              <option>Aceclofenaco</option>
-              <option>Biozatin</option>
-              <option>Captopril</option>
-              <option>Dipirona</option>
-              <option>Dipropam</option>
-              <option>Efedrin</option>
-              <option>Famox</option>
-            </select>
-          </div>
+          
           <div class="col-md-3 espaco-form-group">
             <label>Vencimento</label>
             <input [(ngModel)]="itemEstoque.vencimento" type="date" id="dtMedicamento" class="form-control">
+          </div>
+
+          <div class="col-md-3 espaco-form-group">
+            <label class="">Quantidade a dar entrada</label>
+            <input [(ngModel)]="itemEstoque.quantidadeEstoque" class="form-control" type="number" enabled="false">
           </div>
 
         </div>
@@ -67,15 +62,15 @@
             <thead>
               <tr role="row">
                 <th>Quantidade</th>
-                <th>Unidade Medida</th>
+                
                 <th>Data de Vencimento</th>
                 <th>Procedência</th>
               </tr>
             </thead>
             <tbody>
               <tr role="row" class="odd" *ngFor="let item of itensEstoque" >
-                <td class="sorting_1">{{item.quantidade}}</td>
-                <td>{{item.unidadeMedida}}</td>
+                <td class="sorting_1">{{item.quantidadeEstoque}}</td>
+                
                 <td>{{item.vencimento}}</td>
                 <td>{{item.procedencia}}</td>
               </tr>
@@ -83,53 +78,7 @@
               
             </tbody>
 
-<!-- 
-            <tfoot>
-              <tr>
-                <th rowspan="1" colspan="1">Quantidade:</th>
-                <th rowspan="1" colspan="1"></th>
-                <th rowspan="1" colspan="1"></th>
-                <th rowspan="1" colspan="1">
-                  <button id="btnAddMedicamento" type="button" class="btn btn-primary pull-right" (click)="openModal(templateMedicamento)">Adicionar
-                    Medicamento
-                  </button>
-
-                  <ng-template #templateMedicamento>
-
-                    <div class="modal-header">
-
-                      <h4 class="modal-title">Informar Vencimentos </h4>
-                      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
-                        <span aria-hidden="true">×</span>
-                      </button>
-
-
-                    </div>
-                    <div class="modal-body">
-                      <p>Por favor, informe o vencimento da(s) unidade(s) informada(s): </p>
-
-                      <div class="form-check">
-                        <input id="chkTodas" type="checkbox" class="form-check-input">
-                        <label class="form-check-label" for="exampleCheck1">O mesmo para todas</label>
-                      </div>
-
-                      <p><input id="data1" class="form-control" type="date"> </p>
-                      <p><input id="data2" class="form-control" type="date"> </p>
-                      <p><input id="data3" class="form-control" type="date"> </p>
-                      <p><input id="data4" class="form-control" type="date"> </p>
-                      <p><input id="data5" class="form-control" type="date"> </p>
-
-                    </div>
-                    <div class="modal-footer">
-                      <button id="fechaModalVencimento" type="button" class="btn btn-default pull-left" (click)="closeModal()">Fechar</button>
-                      <button id="btnConfirmar" class="btn btn-primary">Confirmar</button>
-                    </div>
-
-                  </ng-template>
-                </th>
-              </tr>
-            </tfoot> -->
-
+                
           </table>
         </div>
       </div>
@@ -139,8 +88,51 @@
         <button class="btn btn-red pull-left" [routerLink]="'../inicio'" >Voltar</button>
       </div>
 
+
+
     </div>
 
+    
+    <button type="button" id="modalSucesso" hidden (click)="openModal(templateItemEstoque)"></button>
+    <button type="button" id="modalSucesso" hidden (click)="openModal(templateMessage)"></button>
+    <ng-template #templateItemEstoque>
+
+      <div class="modal-header">
+
+        <h4 class="modal-title">Item(s) Cadastrado(s) </h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">×</span>
+        </button>
+
+
+      </div>
+      <div class="modal-body">
+        <p>Operação bem sucedida! </p>
+      </div>
+      <div class="modal-footer">
+        <button id="btnConfirmar" class="btn btn-primary" (click)="redirecionaInicio()" >Ok</button>
+      </div>
+
+    </ng-template> 
+    <ng-template #templateMessage>
+
+      <div class="modal-header">
+
+        <h4 class="modal-title">Atenção:</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">×</span>
+        </button>
+
+
+      </div>
+      <div class="modal-body">
+        <p id="paragrafoMensagem"> </p>
+      </div>
+      <div class="modal-footer">
+        <button id="btnConfirmar" class="btn btn-primary">Ok</button>
+      </div>
+
+    </ng-template> 
 
 
   </div>

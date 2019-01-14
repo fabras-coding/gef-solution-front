@@ -1,7 +1,8 @@
 export class ItemEstoque{
     medicamento: MedicamentoEstoque;
-    quantidade: number;
+    quantidadeEstoque: number;
     vencimento: string;
+    procedencia: string;
 
 }
 

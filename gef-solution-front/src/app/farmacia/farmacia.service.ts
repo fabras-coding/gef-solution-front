@@ -58,9 +58,24 @@ export class FarmaciaApiService{
       var params = json;
       var headers = new Headers();
 
+      console.log(json);
      
       headers.append('Content-Type', 'application/json');
       return this.http.post(this.ulrPostMedicamento, params, {headers : headers});
+      
+
+    }
+
+    putJSONMedicamento(medicamento: MedicamentoCad, id: number) {
+      
+      var json = JSON.stringify(medicamento);
+      var params = json;
+      var headers = new Headers();
+
+      console.log(json);
+     
+      headers.append('Content-Type', 'application/json');
+      return this.http.put(this.ulrPostMedicamento +"/"+id, params, {headers : headers});
       
 
     }
