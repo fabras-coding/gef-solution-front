@@ -7,12 +7,15 @@
       <div class="row">
         <div class="espaco-form-group">
 
-          <div class="col-md-4">
+          <div class="col-md-2" hidden>
             <label class="">Código Interno</label>
-            <input class="form-control" type="text" disabled value="{{idRecebido}}">
+            <input [(ngModel)]="idRecebido" class="form-control" type="text" disabled value="{{idRecebido}}">
           </div>
 
-        
+          <div class="col-md-3">
+              <label class="">Un. de Medida</label>
+              <input [(ngModel)]="textoUnidadeMedida" class="form-control" type="text" disabled >
+          </div>
 
           <div class="col-md-7">
             <label>Medicamento</label>
@@ -25,7 +28,7 @@
 
           </div>
           <div class="col-md-1"> 
-            <a id="btnNaoAchou" (click)="novoItem()" >Não achou?<i  class="fas fa-plus-circle"></i> </a>
+            <a id="btnNaoAchou" [routerLink]="'../novo-medicamento'" >Novo<i style="margin-left:10px;"  class="fas fa-plus-circle"></i> </a>
             <a id="btnVoltar" style="display: none; color: red"  (click)="voltaMedicamento()" ><br><i class="fas fa-ban">Cancelar</i></a>
           </div>
 
@@ -66,6 +69,7 @@
           <table id="table_estoque" class="table table-bordered dataTable" role="grid">
             <thead>
               <tr role="row">
+                <th>*</th>
                 <th>Quantidade</th>
                 
                 <th>Data de Vencimento</th>
@@ -73,7 +77,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr role="row" class="odd" *ngFor="let item of itensEstoque" >
+              <tr role="row" class="odd" *ngFor="let item of itensEstoque; let i = index " >
+                <td style="color: red" ><b><a style="color: red" (click)="removeItem(index)">X </a></b></td>
                 <td class="sorting_1">{{item.quantidadeEstoque}}</td>
                 
                 <td>{{item.vencimento}}</td>

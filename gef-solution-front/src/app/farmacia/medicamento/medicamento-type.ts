@@ -11,7 +11,8 @@ export interface Medicamento{
     ativo: boolean,
     quantidadeEstoqueCritico: number,
     nomeAnvisa:string,
-    principioAtivo: PrincipioAtivo
+    principioAtivo: PrincipioAtivo,
+    unidadeMedida: UnidadeMedida
 }
 
 export interface TipoMedicamento{

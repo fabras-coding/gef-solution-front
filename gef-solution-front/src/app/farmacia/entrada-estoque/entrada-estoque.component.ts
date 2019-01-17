@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { UtilityService } from 'src/service/utility.service';
 import { FarmaciaApiService } from '../farmacia.service';
-import { Medicamento } from '../medicamento/medicamento-type';
+import { Medicamento, UnidadeMedida } from '../medicamento/medicamento-type';
 import { FormsModule, NgModel } from '@angular/forms'
 import { Response } from '@angular/http';
 import { ItemEstoque, MedicamentoEstoque } from './item-estoque';
@@ -17,11 +17,13 @@ import { Alert } from 'selenium-webdriver';
 })
 export class EntradaEstoqueComponent implements OnInit {
 
+  unidadesMedida: UnidadeMedida[] =[];
   medicamentos: Medicamento[] = [];
   itensEstoque: ItemEstoque[] = [];
   itemEstoque: ItemEstoque;
   idRecebido: string;
   idMedicamento: number;
+  textoUnidadeMedida: string;
   textoPadrao: string;
 
   @Input() nomeMedicamento: string;
@@ -56,6 +58,13 @@ export class EntradaEstoqueComponent implements OnInit {
 
   }
 
+  listarUnidadesMedida(){
+    this.famarciaService.listarUnidadesMedida()
+    .subscribe((response: Response) => {
+      this.unidadesMedida = response.json();
+    })
+  }
+
   getMedicamentos() {
 
     if (this.idRecebido == null) {
@@ -79,15 +88,27 @@ export class EntradaEstoqueComponent implements OnInit {
 
     novoItem.medicamento = medEstoque;
     novoItem.quantidadeEstoque = this.itemEstoque.quantidadeEstoque;
-    novoItem.vencimento = formatDate(this.itemEstoque.vencimento, 'yyyy-MM-dd ', 'en-US');
+    novoItem.vencimento = formatDate(this.itemEstoque.vencimento, 'dd/MM/yyyy ', 'en-US');
     novoItem.procedencia = this.itemEstoque.procedencia;
 
 
     this.itensEstoque.push(novoItem);
   }
+item
+  removeItem(index: number){
+    
+    
+    this.itensEstoque.splice(index, 1);
+
+  }
+
 
   selectOption(id: number) {
     this.idMedicamento = id;
+    var medSelecionado = this.medicamentos.filter((item_) => item_.id== id)[0];
+    this.textoUnidadeMedida = medSelecionado.unidadeMedida.descricaoUnidadeMedida;
+   
+    
 
   }
 

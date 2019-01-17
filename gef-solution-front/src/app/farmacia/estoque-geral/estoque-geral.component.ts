@@ -26,6 +26,7 @@ export class EstoqueGeralComponent implements OnInit {
   listarEstoque(){
     this.farmaciaService.listarEstoque()
     .subscribe((response : Response) =>{
+      console.log(this.itensEstoque);
       this.itensEstoque =  response.json();
       
     });
