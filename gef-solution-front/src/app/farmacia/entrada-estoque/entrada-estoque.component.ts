@@ -25,6 +25,9 @@ export class EntradaEstoqueComponent implements OnInit {
   idMedicamento: number;
   textoUnidadeMedida: string;
   textoPadrao: string;
+  formControlValue:string = '';
+  nomesMedicamento: string[]= [];
+  medicamentoSelecionado : string ;
 
   @Input() nomeMedicamento: string;
 
@@ -35,6 +38,8 @@ export class EntradaEstoqueComponent implements OnInit {
 
 
   ngOnInit() {
+
+    
     this.closeModal();
     this.idRecebido = this.route.snapshot.paramMap.get("id");
     this.listarMedicamentos();
@@ -45,6 +50,7 @@ export class EntradaEstoqueComponent implements OnInit {
       document.getElementById("ddlMedicamento").setAttribute("disabled", "true");
     }
 
+    
   }
 
 
@@ -54,8 +60,12 @@ export class EntradaEstoqueComponent implements OnInit {
     this.famarciaService.listarMedicamentos()
       .subscribe((response: Response) => {
         this.medicamentos = response.json();
+        this.medicamentos.forEach(element => {
+          this.nomesMedicamento.push(element.nomeMedicamento);
+        });
       });
 
+    
   }
 
   listarUnidadesMedida(){
@@ -94,7 +104,7 @@ export class EntradaEstoqueComponent implements OnInit {
 
     this.itensEstoque.push(novoItem);
   }
-item
+
   removeItem(index: number){
     
     
@@ -122,10 +132,9 @@ item
 
   addMedicamento() {
 
-    var finalizou: boolean = false;
     var controle: number=0;
 
-    //refatorar essa bosta
+    //refatorar
     this.itensEstoque.forEach(element => {
       this.famarciaService.postJSONItemEstoque(element)
         .subscribe(
@@ -146,8 +155,6 @@ item
 
     });
 
-    if (finalizou) {
-    }
 
   }
 
@@ -157,7 +164,23 @@ item
     this.router.navigate(['inicio']);
   }
 
+ teste(){
+   console.log(this.formControlValue.replace("@",""));
+ }
 
+  findChoicesIn(list) {
+    
+    return (searchText) =>
+      list.filter(item => item.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
 
+  }
+
+  getChoiceLabel(choice: string) {
+    return `@${choice} `;
+  }
+
+ 
+
+  
 
 }

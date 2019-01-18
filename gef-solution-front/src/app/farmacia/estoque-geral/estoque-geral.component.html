@@ -19,9 +19,9 @@
               <tbody>
                 <tr *ngFor="let estoque of itensEstoque" role="row" class="odd" >
                   <td>{{estoque.medicamento.nomeMedicamento}}</td>
-                  <td>{{estoque.quantidade}}</td>
+                  <td>{{estoque.quantidadeEstoque}}</td>
                   <td>{{ estoque.vencimento | date  : "dd/MM/yyyy"   }}</td>
-                  <td>{{estoque.medicamento.observacao}}</td>
+                  <td>{{estoque.procedencia}}</td>
                 </tr>
                 
               </tbody>

@@ -29,8 +29,9 @@ export interface PrincipioAtivo{
 export interface Estoque{
     id:number,
     medicamento: Medicamento,
-    quantidade: number,
-    vencimento: Date
+    quantidadeEstoque: number,
+    vencimento: Date,
+    procedencia: string
 }
 
 export interface ViaAdministracao{

@@ -19,12 +19,22 @@
 
           <div class="col-md-7">
             <label>Medicamento</label>
-            <select [(ngModel)]="textoPadrao" id="ddlMedicamento" (change)="selectOption($event.target.value)" class="form-control " style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <textarea 
+              (input)="teste()"
+              placeholder="Digite @ para pesquisar..."
+              class="form-control"
+              rows="1"
+              [(ngModel)]="formControlValue"
+              mwlTextInputAutocomplete
+              [findChoices]="findChoicesIn(nomesMedicamento)"
+              [getChoiceLabel]="getChoiceLabel">
+            </textarea>
+            <!-- <select [(ngModel)]="textoPadrao" id="ddlMedicamento" (change)="selectOption($event.target.value)" class="form-control " style="width: 100%;" tabindex="-1" aria-hidden="true">
               <option  >Selecione...</option>
               <option *ngFor="let medicamento of getMedicamentos()"  value="{{medicamento.guid}}" [selected]="idRecebido == medicamento.guid">{{medicamento.nomeMedicamento}}</option>
               
               
-            </select>
+            </select> -->
 
           </div>
           <div class="col-md-1"> 
@@ -53,8 +63,10 @@
             <textarea [(ngModel)]="itemEstoque.procedencia" rows="3" class="form-control" id="txtProcedencia" placeholder="Digite..."></textarea>
           </div>
           
+         
+
           <div class="col-md-11"></div>
-          <div class="col-md-1"> <a  (click)="addItem()" ><h2><i  class="fas fa-plus-circle"></i></h2> </a></div>
+          <div class="col-md-1"> <a  (click)="teste()" ><h2><i  class="fas fa-plus-circle"></i></h2> </a></div>
 
       </div>
 
