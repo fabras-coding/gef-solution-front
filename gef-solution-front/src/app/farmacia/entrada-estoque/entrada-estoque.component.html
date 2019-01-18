@@ -20,7 +20,8 @@
           <div class="col-md-7">
             <label>Medicamento</label>
               <textarea 
-              (input)="teste()"
+              
+              (blur)="setaUnidadeMedida()"
               placeholder="Digite @ para pesquisar..."
               class="form-control"
               rows="1"
@@ -66,7 +67,7 @@
          
 
           <div class="col-md-11"></div>
-          <div class="col-md-1"> <a  (click)="teste()" ><h2><i  class="fas fa-plus-circle"></i></h2> </a></div>
+          <div class="col-md-1"> <a  (click)="addItem()" ><h2><i  class="fas fa-plus-circle"></i></h2> </a></div>
 
       </div>
 
@@ -116,7 +117,7 @@
 
     
     <button type="button" id="modalSucesso" hidden (click)="openModal(templateItemEstoque)"></button>
-    <button type="button" id="modalSucesso" hidden (click)="openModal(templateMessage)"></button>
+    <button type="button" id="modalErro" hidden (click)="openModal(templateMessage)"></button>
     <ng-template #templateItemEstoque>
 
       <div class="modal-header">

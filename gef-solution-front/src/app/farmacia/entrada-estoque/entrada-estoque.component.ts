@@ -23,11 +23,11 @@ export class EntradaEstoqueComponent implements OnInit {
   itemEstoque: ItemEstoque;
   idRecebido: string;
   idMedicamento: number;
-  textoUnidadeMedida: string;
+  textoUnidadeMedida: string = '';
   textoPadrao: string;
   formControlValue:string = '';
   nomesMedicamento: string[]= [];
-  medicamentoSelecionado : string ;
+  
 
   @Input() nomeMedicamento: string;
 
@@ -98,8 +98,9 @@ export class EntradaEstoqueComponent implements OnInit {
 
     novoItem.medicamento = medEstoque;
     novoItem.quantidadeEstoque = this.itemEstoque.quantidadeEstoque;
-    novoItem.vencimento = formatDate(this.itemEstoque.vencimento, 'dd/MM/yyyy ', 'en-US');
+    novoItem.vencimento = formatDate(this.itemEstoque.vencimento, 'dd/MM/yyyy', 'en-US');
     novoItem.procedencia = this.itemEstoque.procedencia;
+
 
 
     this.itensEstoque.push(novoItem);
@@ -113,14 +114,11 @@ export class EntradaEstoqueComponent implements OnInit {
   }
 
 
-  selectOption(id: number) {
-    this.idMedicamento = id;
-    var medSelecionado = this.medicamentos.filter((item_) => item_.id== id)[0];
-    this.textoUnidadeMedida = medSelecionado.unidadeMedida.descricaoUnidadeMedida;
-   
-    
-
-  }
+  // selectOption(id: number) {
+  //   this.idMedicamento = id;
+  //   var medSelecionado = this.medicamentos.filter((item_) => item_.id== id)[0];
+  //   this.textoUnidadeMedida = medSelecionado.unidadeMedida.descricaoUnidadeMedida;
+  // }
 
   openModal(template: TemplateRef<any>) {
     this.util.openModal(template);
@@ -136,6 +134,7 @@ export class EntradaEstoqueComponent implements OnInit {
 
     //refatorar
     this.itensEstoque.forEach(element => {
+      element.vencimento = this.itemEstoque.vencimento;
       this.famarciaService.postJSONItemEstoque(element)
         .subscribe(
           data => {
@@ -147,8 +146,9 @@ export class EntradaEstoqueComponent implements OnInit {
             }
           },
           error => {
-            document.getElementById("paragrafoMensagem").innerText = error;
-            document.getElementById("templateMessage").click();
+            document.getElementById("modalErro").click();
+            document.getElementById("paragrafoMensagem").innerText = "Ocorreu um erro inesperado.";
+            
 
           }
         );
@@ -164,9 +164,6 @@ export class EntradaEstoqueComponent implements OnInit {
     this.router.navigate(['inicio']);
   }
 
- teste(){
-   console.log(this.formControlValue.replace("@",""));
- }
 
   findChoicesIn(list) {
     
@@ -179,6 +176,14 @@ export class EntradaEstoqueComponent implements OnInit {
     return `@${choice} `;
   }
 
+
+  setaUnidadeMedida(){
+    var med = this.medicamentos.filter((item)=> item.nomeMedicamento == this.formControlValue.replace("@","").trim())[0];
+
+    this.idMedicamento = med.id;
+    this.textoUnidadeMedida = med.unidadeMedida.descricaoUnidadeMedida;   
+    
+  }
  
 
   
