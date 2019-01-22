@@ -102,11 +102,7 @@ export class MedicamentoComponent implements OnInit {
 
     medicamentoCad.guid = this.globalGuid.toString();
 
-    
-    alert(this.medicamentos.filter((item) => item.id ==this.idMedicamento).map(x=> x.nomeMedicamento)[0]);
-    alert(this.idMedicamento);
-
-    medicamentoCad.nomeMedicamento = this.nomeMedicamento == null ? this.medicamentos.filter((item) => item.id ==this.idMedicamento).map(x=> x.nomeMedicamento)[0] : "";
+    medicamentoCad.nomeMedicamento = this.nomeMedicamento;
     medicamentoCad.tipoMedicamento = tipoMedicamento;
     medicamentoCad.observacao = this.observacao;
     medicamentoCad.cadastroCompleto = true;
@@ -121,8 +117,7 @@ export class MedicamentoComponent implements OnInit {
     if (insereEstoque) {
       this.closeModal();
 
-      if (this.isNovoItem) {
-
+      
 
         this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
           data => {
@@ -131,24 +126,11 @@ export class MedicamentoComponent implements OnInit {
           error => {
             alert(error);
           });
-      }
-      else {
-
-        var idMedicamentoPut = this.idMedicamento;;
-
-        delete medicamentoCad.guid;
-        this.famarciaService.putJSONMedicamento(medicamentoCad, idMedicamentoPut).subscribe(
-          data => {
-            this.router.navigate(['entrada-estoque/' + this.globalGuid]);
-          },
-          error => {
-            alert(error);
-          });
-      }
+      
     }
     else {
 
-      if (this.isNovoItem) {
+     
         this.closeModal();
         this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
           data => {
@@ -158,20 +140,6 @@ export class MedicamentoComponent implements OnInit {
           error => {
             alert(error);
           });
-      }
-      else{
-
-        delete medicamentoCad.guid;
-        this.famarciaService.putJSONMedicamento(medicamentoCad, this.idMedicamento).subscribe(
-          data => {
-            document.getElementById("modalSucesso").click();
-            
-          },
-          error => {
-            alert(error);
-          });
-      }
-
 
     }
   }
@@ -226,24 +194,6 @@ export class MedicamentoComponent implements OnInit {
       })
   }
 
-  //TODO: Parte que faz o autoComplete do autoComplete do medicamento funcionar (mas o css nao ficou legal e nao vou checar agora)
-  model: any;
-
-  @ViewChild('instance') instance: NgbTypeahead;
-  focus$ = new Subject<string>();
-  click$ = new Subject<string>();
-
-  search = (text$: Observable<string>) => {
-    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
-    const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
-    const inputFocus$ = this.focus$;
-
-    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.medicamentos.map(x => x.nomeMedicamento)
-        : this.medicamentos.map(z => z.nomeMedicamento).filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
-    );
-  }
-  //Fim AutoComplete
 
 
   openModal(template: TemplateRef<any>) {

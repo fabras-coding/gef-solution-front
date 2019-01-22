@@ -46,12 +46,13 @@ export class EntradaEstoqueComponent implements OnInit {
 
     this.textoPadrao = "Selecione...";
 
-    if (this.idRecebido != null) {
-      document.getElementById("ddlMedicamento").setAttribute("disabled", "true");
-    }
-
+    document.getElementById("paragrafoMensagem").innerText = "Teste eeee";
+    document.getElementById("disparador").click();
+    
     
   }
+
+ 
 
 
 
@@ -183,6 +184,17 @@ export class EntradaEstoqueComponent implements OnInit {
     this.idMedicamento = med.id;
     this.textoUnidadeMedida = med.unidadeMedida.descricaoUnidadeMedida;   
     
+  }
+
+  selecionaMedicamento(idRecebido : string){
+      var med = this.medicamentos.filter((item)=> item.guid == idRecebido)[0];
+
+      console.log(idRecebido);
+      console.log(this.medicamentos.length);
+      console.log(med);
+      this.idMedicamento = med.id;
+      this.formControlValue = med.nomeMedicamento;
+
   }
  
 

@@ -5,6 +5,14 @@
 
         <div class="row">
           <div class="espaco-form-group">
+
+              <div class="col-md-7">
+                  <label>Medicamento</label>
+                  <input class="form-control" type="text" id="nomeMedicamento" [(ngModel)]="nomeMedicamento" placeholder="Informe o nome do medicamento a ser inserido" >
+                  
+    
+                </div>
+
             <div class="col-md-3">
 
               <label>Tipo</label>
@@ -16,30 +24,8 @@
 
             </div>
 
-            <div class="col-md-7">
-              <label>Medicamento</label>
-              <select id="ddlMedicamento" class="form-control" [(ngModel)]="idMedicamento" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                <option value="0">Selecione...</option>
-                <option *ngFor="let medicamento of getMedicamentosDesativados()" value="{{medicamento.guid}}">{{medicamento.nomeMedicamento}}</option>
-              </select>
-              <input class="form-control" type="text" id="nomeMedicamento" [(ngModel)]="nomeMedicamento" placeholder="Insira o nome do medicamento a ser inserido" style="display: none">
-              
-
-            </div>
-            
-            <!-- Um dia com mais calma eu faço isso direitinho -->
-            <!-- <div class="col-md-3"> 
-                <label for="typeahead-focus">Medicamento</label>
-              <input id="typeahead-focus"
-                     type="text"
-                     class="form-control" 
-                     [(ngModel)]="model" 
-                     [ngbTypeahead]="search" 
-                     (focus)="focus$.next($event.target.value)"
-                     (click)="click$.next($event.target.value)"
-                     #instance="ngbTypeahead" />
-            </div> -->
-
+          
+          
           </div>
 
 
@@ -106,7 +92,7 @@
 
   </div>
   <div class="modal-body">
-    <h3 style="text-align: center">Deseja avançar para entrada em estoque? </h3>
+    <h3 style="text-align: center">Deseja avançar para a entrada em estoque? </h3>
     <p style="text-align: center">(O medicamento será ativado no sistema independente da decisão)</p>
 
   </div>
