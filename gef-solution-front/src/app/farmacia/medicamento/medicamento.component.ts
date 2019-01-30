@@ -83,7 +83,8 @@ export class MedicamentoComponent implements OnInit {
   }
 
   cadastrarMedicamento(insereEstoque: boolean) {
-
+    
+    this.closeModal();
     this.globalGuid = Guid.create();
 
     var medicamentoCad = new MedicamentoCad();
@@ -115,9 +116,6 @@ export class MedicamentoComponent implements OnInit {
 
 
     if (insereEstoque) {
-      this.closeModal();
-
-      
 
         this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
           data => {
@@ -130,8 +128,6 @@ export class MedicamentoComponent implements OnInit {
     }
     else {
 
-     
-        this.closeModal();
         this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
           data => {
             document.getElementById("modalSucesso").click();

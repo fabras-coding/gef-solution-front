@@ -6,27 +6,52 @@
       <div class="row">
         <div class="espaco-form-group">
 
-          <div class="col-md-12 col-sm-12 col-lg-12">
-            <table id="table_estoque" class="table table-bordered dataTable" role="grid"  >
+          <div class="col-md-3">
+
+            <label>Tipo de Medicamento</label>
+            <select id="ddlTipo" class="form-control" [(ngModel)]="idTipoMedicamento" style="width: 100%;" tabindex="-1"
+              aria-hidden="true">
+              <option *ngFor="let tipoMedicamento of tipoMedicamentos" value="{{tipoMedicamento.idTipoMedicamento}}">{{tipoMedicamento.nomeTipoMedicamento}}
+              </option>
+            </select>
+
+          </div>
+
+          <div class="col-md-6">
+            <label>Ordenar por</label>
+            <select id="ddlFiltro" class="form-control">
+              <option value="0">Selecione...</option>
+              <option value="1">Maior Vencimento</option>
+              <option value="2">Menor Vencimento</option>
+              <option value="3">Maior Estoque</option>
+              <option value="4">Menor Estoque</option>
+            </select>
+
+          </div>
+
+
+
+          <div class="col-md-12 col-sm-12 col-lg-12 espaco-form-group">
+            <table id="table_estoque" class="table table-bordered dataTable" role="grid">
               <thead>
                 <tr role="row">
-                    <th>Nome Medicamento</th>
+                  <th>Nome Medicamento</th>
                   <th>Quantidade</th>
                   <th>Data de Vencimento</th>
                   <th>Procedência</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let estoque of itensEstoque" role="row" class="odd" >
+                <tr *ngFor="let estoque of itensEstoque" role="row" class="odd">
                   <td>{{estoque.medicamento.nomeMedicamento}}</td>
                   <td>{{estoque.quantidadeEstoque}}</td>
-                  <td>{{ estoque.vencimento | date  : "dd/MM/yyyy"   }}</td>
+                  <td>{{ estoque.vencimento | date : "dd/MM/yyyy" }}</td>
                   <td>{{estoque.procedencia}}</td>
                 </tr>
-                
+
               </tbody>
-              
-  
+
+
             </table>
           </div>
 

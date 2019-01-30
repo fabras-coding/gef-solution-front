@@ -23,6 +23,11 @@ imports:[ RouterModule.forRoot([
     {
         path: 'estoque-geral',
         loadChildren: '../app/farmacia/estoque-geral/estoque-geral.module#EstoqueGeralModule'
+    },
+
+    {
+        path: 'baixa-estoque',
+        loadChildren: '../app/farmacia/saida-estoque/saida-estoque.module#SaidaEstoqueModule'
     }
 
 

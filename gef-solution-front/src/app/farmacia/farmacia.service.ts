@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { MedicamentoCad } from "../farmacia/medicamento/medicamento-type";
 import { catchError} from 'rxjs/operators';
 import { ItemEstoque } from "./entrada-estoque/item-estoque";
+import { TransacaoBaixa } from "./saida-estoque/item-baixa-estoque";
 
 @Injectable()
 export class FarmaciaApiService{
@@ -20,6 +21,7 @@ export class FarmaciaApiService{
 
     ulrPostMedicamento: string = "https://gefwebapi.azurewebsites.net/api/Medicamento";
     urlPostItemEstoque: string= "https://gefwebapi.azurewebsites.net/api/Estoque";
+    urlPostBaixaEstoque: string= "https://gefwebapi.azurewebsites.net/api/Transacao"
 
     urlGetMedicamentosFake: string= "http://www.mocky.io/v2/5c36235a3000008b0021b7e5";
 
@@ -86,10 +88,21 @@ export class FarmaciaApiService{
       var headers = new Headers();
 
       console.log(json);
-      
+
       headers.append('Content-Type', 'application/json');
       return this.http.post(this.urlPostItemEstoque, params, {headers : headers});
 
+    }
+
+    postJSONBaixaEstoque(itemBaixa : TransacaoBaixa){
+      var json = JSON.stringify(itemBaixa);
+      var params = json;
+      var headers = new Headers();
+
+      console.log(json);
+
+      headers.append('Content-Type', 'application/json');
+      return this.http.post(this.urlPostBaixaEstoque, params, {headers: headers});
     }
     
 }

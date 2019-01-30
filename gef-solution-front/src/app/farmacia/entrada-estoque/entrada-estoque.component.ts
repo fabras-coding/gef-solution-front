@@ -9,6 +9,8 @@ import { ItemEstoque, MedicamentoEstoque } from './item-estoque';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alert } from 'selenium-webdriver';
+import { TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-entrada-estoque',
@@ -27,43 +29,36 @@ export class EntradaEstoqueComponent implements OnInit {
   textoPadrao: string;
   formControlValue:string = '';
   nomesMedicamento: string[]= [];
+  textoVencimento: string= "";
   
 
   @Input() nomeMedicamento: string;
 
   constructor(private util: UtilityService, protected famarciaService: FarmaciaApiService, private route: ActivatedRoute, private router: Router) {
     this.itemEstoque = new ItemEstoque();
-
   }
 
 
   ngOnInit() {
 
-    
     this.closeModal();
     this.idRecebido = this.route.snapshot.paramMap.get("id");
     this.listarMedicamentos();
 
     this.textoPadrao = "Selecione...";
-
-    document.getElementById("paragrafoMensagem").innerText = "Teste eeee";
-    document.getElementById("disparador").click();
-    
     
   }
 
- 
 
-
-
-  listarMedicamentos() {
-
-    this.famarciaService.listarMedicamentos()
+  listarMedicamentos()  {
+     this.famarciaService.listarMedicamentos()
       .subscribe((response: Response) => {
         this.medicamentos = response.json();
         this.medicamentos.forEach(element => {
           this.nomesMedicamento.push(element.nomeMedicamento);
         });
+        this.selecionaMedicamento();
+
       });
 
     
@@ -76,20 +71,6 @@ export class EntradaEstoqueComponent implements OnInit {
     })
   }
 
-  getMedicamentos() {
-
-    if (this.idRecebido == null) {
-
-      return this.medicamentos.filter((item) => item.ativo === true);
-
-    }
-    else {
-
-      this.idMedicamento = (this.medicamentos.filter((item) => item.guid === this.idRecebido).map(x => x.id))[0];
-      return this.medicamentos.filter((item) => item.guid === this.idRecebido);
-    }
-  }
-
   addItem() {
 
     var novoItem = new ItemEstoque();
@@ -99,27 +80,18 @@ export class EntradaEstoqueComponent implements OnInit {
 
     novoItem.medicamento = medEstoque;
     novoItem.quantidadeEstoque = this.itemEstoque.quantidadeEstoque;
-    novoItem.vencimento = formatDate(this.itemEstoque.vencimento, 'dd/MM/yyyy', 'en-US');
     novoItem.procedencia = this.itemEstoque.procedencia;
-
-
+    novoItem.vencimentoFormatado = formatDate(this.itemEstoque.vencimento, 'dd/MM/yyyy', 'en-US');
+    novoItem.vencimento = this.itemEstoque.vencimento;
 
     this.itensEstoque.push(novoItem);
   }
 
   removeItem(index: number){
-    
-    
     this.itensEstoque.splice(index, 1);
-
   }
 
 
-  // selectOption(id: number) {
-  //   this.idMedicamento = id;
-  //   var medSelecionado = this.medicamentos.filter((item_) => item_.id== id)[0];
-  //   this.textoUnidadeMedida = medSelecionado.unidadeMedida.descricaoUnidadeMedida;
-  // }
 
   openModal(template: TemplateRef<any>) {
     this.util.openModal(template);
@@ -132,13 +104,16 @@ export class EntradaEstoqueComponent implements OnInit {
   addMedicamento() {
 
     var controle: number=0;
-
+    
     //refatorar
     this.itensEstoque.forEach(element => {
-      element.vencimento = this.itemEstoque.vencimento;
+
+      console.log(element.vencimento);
+
       this.famarciaService.postJSONItemEstoque(element)
         .subscribe(
           data => {
+
             controle++;
             if(controle==this.itensEstoque.length)
             {
@@ -147,6 +122,7 @@ export class EntradaEstoqueComponent implements OnInit {
             }
           },
           error => {
+            
             document.getElementById("modalErro").click();
             document.getElementById("paragrafoMensagem").innerText = "Ocorreu um erro inesperado.";
             
@@ -186,15 +162,14 @@ export class EntradaEstoqueComponent implements OnInit {
     
   }
 
-  selecionaMedicamento(idRecebido : string){
-      var med = this.medicamentos.filter((item)=> item.guid == idRecebido)[0];
 
-      console.log(idRecebido);
-      console.log(this.medicamentos.length);
-      console.log(med);
-      this.idMedicamento = med.id;
-      this.formControlValue = med.nomeMedicamento;
+  selecionaMedicamento(){
+    var med = this.medicamentos.filter((item)=> item.guid == this.idRecebido)[0];
 
+    this.idMedicamento = med.id;
+    this.formControlValue = med.nomeMedicamento;
+    document.getElementById("textAreaMedicamento").setAttribute("disabled", "true");
+    this.setaUnidadeMedida();
   }
  
 

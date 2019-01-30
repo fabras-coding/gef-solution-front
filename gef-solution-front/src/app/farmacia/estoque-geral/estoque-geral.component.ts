@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FarmaciaApiService } from '../farmacia.service';
-import { Estoque } from '../medicamento/medicamento-type';
+import { Estoque, TipoMedicamento } from '../medicamento/medicamento-type';
 import { Response } from '@angular/http';
 
 @Component({
@@ -11,6 +11,8 @@ import { Response } from '@angular/http';
 export class EstoqueGeralComponent implements OnInit {
 
   itensEstoque : Estoque[]=[];
+  tipoMedicamentos: TipoMedicamento[] = [];
+  idTipoMedicamento: any;
   
   constructor(protected farmaciaService : FarmaciaApiService) { 
 
@@ -18,6 +20,7 @@ export class EstoqueGeralComponent implements OnInit {
 
   ngOnInit() {
     this.listarEstoque();
+    this.listarTipoMedicamentos();
     
   }
 
@@ -32,5 +35,12 @@ export class EstoqueGeralComponent implements OnInit {
     });
   }
 
+
+  listarTipoMedicamentos() {
+    this.farmaciaService.listarTipoMedicamentos()
+      .subscribe((response: Response) => {
+        this.tipoMedicamentos = response.json();
+      });
+  }
 
 }
