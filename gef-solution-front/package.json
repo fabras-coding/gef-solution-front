@@ -17,7 +17,6 @@
     "@angular/core": "^6.0.3",
     "@angular/forms": "^6.0.3",
     "@angular/http": "^6.0.3",
-    "@angular/material": "^7.3.1",
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
@@ -28,6 +27,7 @@
     "dateformat": "^3.0.3",
     "guid-typescript": "^1.0.9",
     "ngx-bootstrap": "^3.1.2",
+    "ngx-pagination": "^3.2.1",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

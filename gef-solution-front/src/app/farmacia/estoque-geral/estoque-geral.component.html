@@ -8,18 +8,23 @@
 
           <div class="col-md-3">
 
-            <label>Tipo de Medicamento</label>
-            <select id="ddlTipo" class="form-control" [(ngModel)]="idTipoMedicamento" style="width: 100%;" tabindex="-1"
+            <label>Nome Medicamento</label>
+            <input type="text" class="form-control" placeholder="Pesquise aqui..." (input)="pesquisar()" [(ngModel)]="textoPesquisa">
+
+            <!-- <select id="ddlTipo" class="form-control" [(ngModel)]="idTipoMedicamento" style="width: 100%;" tabindex="-1"
               aria-hidden="true">
               <option *ngFor="let tipoMedicamento of tipoMedicamentos" value="{{tipoMedicamento.idTipoMedicamento}}">{{tipoMedicamento.nomeTipoMedicamento}}
               </option>
-            </select>
+            </select> -->
 
+          </div>
+          <div class="col-md-1" style="margin-top: 30px; margin-left: -20px;">
+            <a (click)="pesquisar()"><i class="fas fa-search"></i></a>
           </div>
 
           <div class="col-md-6">
             <label>Ordenar por</label>
-            <select id="ddlFiltro" class="form-control">
+            <select id="ddlFiltro" class="form-control" (change)="filtrar($event.target.value)">
               <option value="0">Selecione...</option>
               <option value="1">Maior Vencimento</option>
               <option value="2">Menor Vencimento</option>
@@ -35,21 +40,24 @@
             <table id="table_estoque" class="table table-bordered dataTable" role="grid">
               <thead>
                 <tr role="row">
-                  <th>Nome Medicamento</th>
+                  <!-- <th>Status</th> -->
+                  <th >Nome Medicamento</th>
                   <th>Quantidade</th>
                   <th>Data de Vencimento</th>
                   <th>Procedência</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let estoque of itensEstoque" role="row" class="odd">
+                <tr *ngFor="let estoque of itensEstoquePesquisa | paginate: {itemsPerPage: 15, currentPage: p }" role="row" class="odd">
+                  <!-- <td>{{statusEstoque(estoque)}}</td> -->
                   <td>{{estoque.medicamento.nomeMedicamento}}</td>
                   <td>{{estoque.quantidadeEstoque}}</td>
-                  <td>{{ estoque.vencimento | date : "dd/MM/yyyy" }}</td>
+                  <td>{{estoque.vencimento | date : "dd/MM/yyyy" }}</td>
                   <td>{{estoque.procedencia}}</td>
                 </tr>
 
               </tbody>
+              <pagination-controls (pageChange)="p = $event"  previousLabel="Anterior" nextLabel="Próxima"></pagination-controls>
 
 
             </table>

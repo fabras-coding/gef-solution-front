@@ -4,10 +4,11 @@ import { EstoqueGeralRoutingModule } from './estoque-geral-routing.module';
 import { EstoqueGeralComponent } from './estoque-geral.component';
 import { FarmaciaApiService } from '../farmacia.service';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
     declarations: [EstoqueGeralComponent],
-    imports: [ EstoqueGeralRoutingModule, CommonModule, FormsModule ],
+    imports: [ EstoqueGeralRoutingModule, CommonModule, FormsModule, NgxPaginationModule ],
     exports: [EstoqueGeralComponent],
     providers: [FarmaciaApiService],
 })
