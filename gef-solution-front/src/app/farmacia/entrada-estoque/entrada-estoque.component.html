@@ -30,10 +30,8 @@
               [findChoices]="findChoicesIn(nomesMedicamento)"
               [getChoiceLabel]="getChoiceLabel">
             </textarea>
-         
-            
-
           </div>
+          
           <button type="button" id="disparador" hidden (click)="openModal(templateMessage)"></button>
           <div class="col-md-1"> 
             <a id="btnNaoAchou" [routerLink]="'../novo-medicamento'" >Novo<i style="margin-left:10px;"  class="fas fa-plus-circle"></i> </a>
