@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Ajuste de Alertas</h2>
+    <div class="box box-primary">
+
+      <div class="row">
+        <div class="espaco-form-group">
+
+          <div class="col-md-4">
+            <label>Avisar vencimento em x dia(s) antes do vencimento</label>
+            <input class="form-control" type="number" id="nomeMedicamento" [(ngModel)]="nomeMedicamento" placeholder="Informe a quantidade de dias">
+
+          </div>
+
+          
+          <div class="col-md-5">
+            <label>Notificar estoque crítico quando faltar X% da quantidade para atingir o estoque crítico </label>
+            <input class="form-control" type="number" id="nomeMedicamento" [(ngModel)]="nomeMedicamento" placeholder="Informe o percentual">
+            <label> </label>
+
+          </div>
+
+
+
+        </div>
+
+
+
+
+        <div class="col-md-12 espaco-form-group">
+          <div class="box-footer">
+            <a id="btnEntradaEstoque"><button class="btn btn-success pull-right" type="submit" (click)="openModal(templateMedicamento)">Salvar Parâmetros
+                </button></a>
+
+
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+  </div>
+  <button type="button" id="modalSucesso" hidden (click)="openModal(templateSucessoMedicamento)"></button>
+</div>
+
+<ng-template #templateMedicamento>
+
+  <div class="modal-header">
+
+    <h4 class="modal-title">Confirmação </h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">×</span>
+    </button>
+
+
+  </div>
+  <div class="modal-body">
+    <h3 style="text-align: center">Deseja avançar para a entrada em estoque? </h3>
+    <p style="text-align: center">(O medicamento será ativado no sistema independente da decisão)</p>
+
+  </div>
+  <div class="modal-footer">
+    <button id="fechaModalVencimento" class="btn btn-default pull-left" (click)="cadastrarMedicamento(false)">Não</button>
+    <button id="btnConfirmar" class="btn btn-primary" (click)="cadastrarMedicamento(true)">Sim</button>
+  </div>
+
+</ng-template>
+
+<ng-template #templateSucessoMedicamento>
+
+  <div class="modal-header">
+
+    <h4 class="modal-title">Sucesso! </h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">×</span>
+    </button>
+
+
+  </div>
+  <div class="modal-body">
+    <h3 style="text-align: center">Medicamento cadastrado com sucesso!</h3>
+
+  </div>
+  <div class="modal-footer">
+    <button id="fechaModalSucesso" class="btn btn-primary pull-center" (click)="redirecionaMedicamento()">Ok</button>
+  </div>
+
+</ng-template>

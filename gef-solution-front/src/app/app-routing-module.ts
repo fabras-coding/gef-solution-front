@@ -34,7 +34,13 @@ import { RouterModule } from '@angular/router';
         {
             path: 'alteracao-medicamento',
             loadChildren: '../app/configuracao/alteracao-medicamento/alteracao-medicamento.module#AlteracaoMedicamentoModule'
+        },
+
+        {
+            path: 'configuracao-aviso',
+            loadChildren: '../app/configuracao/alertas/alertas.module#AlertasModule'
         }
+
 
 
 
