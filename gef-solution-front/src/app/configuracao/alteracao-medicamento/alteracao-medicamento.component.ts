@@ -1,13 +1,14 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { Medicamento, TipoMedicamento, ViaAdministracao, UnidadeMedida, MedicamentoCad, PrincipioAtivo } from '../../farmacia/medicamento/medicamento-type'
-import {FarmaciaApiService} from '../../farmacia/farmacia.service';
+import { FarmaciaApiService } from '../../farmacia/farmacia.service';
 import { UtilityService } from 'src/service/utility.service';
 import { Response } from '@angular/http';
 import { Subject, Observable, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
+import { FormControlName } from '@angular/forms';
 
 
 
@@ -37,7 +38,8 @@ export class AlteracaoMedicamentoComponent implements OnInit {
   nomeMedicamento: string = "";
   isNovoItem: boolean = false;
   globalGuid: Guid;
-
+  nomesMedicamento: string[] = [];
+  formControlValue: string = '';
 
   constructor(private util: UtilityService, protected famarciaService: FarmaciaApiService, private router: Router) {
 
@@ -63,6 +65,31 @@ export class AlteracaoMedicamentoComponent implements OnInit {
 
   }
 
+  listarMedicamentos() {
+    this.famarciaService.listarMedicamentos()
+      .subscribe((response: Response) => {
+        this.medicamentos = response.json();
+        this.medicamentos.forEach(element => {
+          this.nomesMedicamento.push(element.nomeMedicamento);
+        });
+        this.selecionaMedicamento();
+
+      });
+
+
+  }
+
+
+  selecionaMedicamento() {
+    //var med = this.medicamentos.filter((item)=> item.guid == this.idRecebido)[0];
+
+    //this.idMedicamento = med.id;
+    //this.formControlValue = med.nomeMedicamento;
+    //document.getElementById("textAreaMedicamento").setAttribute("disabled", "true");
+    //this.setaUnidadeMedida();
+  }
+
+
   novoItem() {
 
     this.isNovoItem = true;
@@ -83,7 +110,7 @@ export class AlteracaoMedicamentoComponent implements OnInit {
   }
 
   cadastrarMedicamento(insereEstoque: boolean) {
-    
+
     this.closeModal();
     this.globalGuid = Guid.create();
 
@@ -117,25 +144,25 @@ export class AlteracaoMedicamentoComponent implements OnInit {
 
     if (insereEstoque) {
 
-        this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
-          data => {
-            this.router.navigate(['entrada-estoque/' + this.globalGuid]);
-          },
-          error => {
-            alert(error);
-          });
-      
+      this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
+        data => {
+          this.router.navigate(['entrada-estoque/' + this.globalGuid]);
+        },
+        error => {
+          alert(error);
+        });
+
     }
     else {
 
-        this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
-          data => {
-            document.getElementById("modalSucesso").click();
+      this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
+        data => {
+          document.getElementById("modalSucesso").click();
 
-          },
-          error => {
-            alert(error);
-          });
+        },
+        error => {
+          alert(error);
+        });
 
     }
   }
@@ -146,13 +173,6 @@ export class AlteracaoMedicamentoComponent implements OnInit {
   }
 
 
-  listarMedicamentos() {
-
-    this.famarciaService.listarMedicamentos()
-      .subscribe((response: Response) => {
-        this.medicamentos = response.json();
-      });
-  }
 
   getMedicamentosDesativados() {
 
@@ -201,5 +221,38 @@ export class AlteracaoMedicamentoComponent implements OnInit {
   }
 
 
+  findChoicesIn(list) {
+
+    return (searchText) =>
+      list.filter(item => item.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
+
+  }
+
+  getChoiceLabel(choice: string) {
+    return `@${choice} `;
+  }
+
+  habilitaCampos() {
+
+    var med = this.medicamentos.filter((item)=> item.nomeMedicamento == this.formControlValue.replace("@","").trim())[0];
+
+    if (med != undefined && med != null) {
+      document.getElementById("ddlTipo").removeAttribute("disabled");
+      document.getElementById("ddlViaAdministracao").removeAttribute("disabled");
+      document.getElementById("ddlUnidadeMedida").removeAttribute("disabled");
+      document.getElementById("numberQtde").removeAttribute("disabled");
+      document.getElementById("txtObservacao").removeAttribute("disabled");
+      document.getElementById("btnEntradaEstoque2").removeAttribute("disabled");
+    }
+
+      this.idMedicamento = med.id;
+
+      this.idTipoMedicamento = med.tipoMedicamento.idTipoMedicamento;
+      this.idViaAdministracao = med.viaAdministracao.idViaAdministracao;
+      this.idUnidadeMedida = med.unidadeMedida.idUnidadeMedida;
+      this.quantidade = med.quantidadeEstoqueCritico;
+      this.observacao = med.observacao;
+
+  }
 
 }

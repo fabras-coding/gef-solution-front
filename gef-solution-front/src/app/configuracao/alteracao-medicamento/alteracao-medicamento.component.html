@@ -10,7 +10,7 @@
               <label>Medicamento</label>
                 <textarea 
                 id="textAreaMedicamento"
-                (blur)="setaUnidadeMedida()"
+                (blur)="habilitaCampos()"
                 placeholder="Digite @ para pesquisar..."
                 class="form-control"
                 rows="1"
@@ -72,7 +72,7 @@
 
           <div  class="col-md-12 espaco-form-group">
             <div class="box-footer">
-              <a id="btnEntradaEstoque"><button disabled class="btn btn-success pull-right" type="submit" (click)="openModal(templateMedicamento)">Alterar Medicamento</button></a>
+              <a id="btnEntradaEstoque"><button id="btnEntradaEstoque2" disabled class="btn btn-success pull-right" type="submit" (click)="openModal(templateMedicamento)">Alterar Medicamento</button></a>
 
              
             </div>
