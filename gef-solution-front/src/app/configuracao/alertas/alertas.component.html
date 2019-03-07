@@ -8,14 +8,14 @@
 
           <div class="col-md-4">
             <label>Avisar vencimento em x dia(s) antes do vencimento</label>
-            <input class="form-control" type="number" id="nomeMedicamento" [(ngModel)]="nomeMedicamento" placeholder="Informe a quantidade de dias">
+            <input class="form-control" type="number" id="qtdDias" [(ngModel)]="quantidadeDias" placeholder="Informe a quantidade de dias">
 
           </div>
 
           
           <div class="col-md-5">
             <label>Notificar estoque crítico quando faltar X% da quantidade para atingir o estoque crítico </label>
-            <input class="form-control" type="number" id="nomeMedicamento" [(ngModel)]="nomeMedicamento" placeholder="Informe o percentual">
+            <input class="form-control" type="number" id="qdtPercentual" [(ngModel)]="percentual" placeholder="Informe o percentual">
             <label> </label>
 
           </div>
@@ -57,13 +57,16 @@
 
   </div>
   <div class="modal-body">
-    <h3 style="text-align: center">Deseja avançar para a entrada em estoque? </h3>
-    <p style="text-align: center">(O medicamento será ativado no sistema independente da decisão)</p>
+    <h3 style="text-align: center">Parâmetros configurados com sucesso!</h3>
+    <!-- <p style="text-align: center">(O medicamento será ativado no sistema independente da decisão)</p> -->
 
   </div>
-  <div class="modal-footer">
+  <!-- <div class="modal-footer">
     <button id="fechaModalVencimento" class="btn btn-default pull-left" (click)="cadastrarMedicamento(false)">Não</button>
     <button id="btnConfirmar" class="btn btn-primary" (click)="cadastrarMedicamento(true)">Sim</button>
+  </div> -->
+  <div class="modal-footer">
+    <button id="fechaModalSucesso" class="btn btn-primary pull-center" (click)="redirecionaMedicamento()">Ok</button>
   </div>
 
 </ng-template>

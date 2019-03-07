@@ -91,7 +91,7 @@
 
   <div class="modal-header">
 
-    <h4 class="modal-title">Confirmação </h4>
+    <h4 class="modal-title">Sucesso </h4>
     <button type="button" class="close" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">×</span>
     </button>
@@ -99,13 +99,15 @@
 
   </div>
   <div class="modal-body">
-    <h3 style="text-align: center">Deseja avançar para a entrada em estoque? </h3>
-    <p style="text-align: center">(O medicamento será ativado no sistema independente da decisão)</p>
+    <h3 style="text-align: center">O medicamento foi alterado!</h3>
+    <!-- <p style="text-align: center">(O medicamento será ativado no sistema independente da decisão)</p> -->
 
   </div>
   <div class="modal-footer">
-    <button id="fechaModalVencimento" class="btn btn-default pull-left" (click)="cadastrarMedicamento(false)">Não</button>
-    <button id="btnConfirmar" class="btn btn-primary" (click)="cadastrarMedicamento(true)">Sim</button>
+    <div class="modal-footer">
+      <button id="fechaModalSucesso" class="btn btn-primary pull-center" (click)="redirecionaMedicamento()">Ok</button>
+    </div>
+  
   </div>
 
 </ng-template>

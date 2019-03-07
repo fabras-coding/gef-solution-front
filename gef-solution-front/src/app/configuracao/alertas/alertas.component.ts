@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { UtilityService } from 'src/service/utility.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alertas',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlertasComponent implements OnInit {
 
-  constructor() { }
+  constructor(private util: UtilityService,  private router: Router) { }
 
   ngOnInit() {
   }
+
+  
+  openModal(template: TemplateRef<any>) {
+    this.util.openModal(template);
+  }
+
+  closeModal() {
+    this.util.closeModal();
+  }
+
+  
+  redirecionaMedicamento() {
+    this.closeModal();
+    this.router.navigate(['inicio']);
+  }
+
 
 }

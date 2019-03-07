@@ -13,15 +13,18 @@ export class FarmaciaApiService{
     constructor(private http: Http){}
 
     
-    urlGetMedicamentos: string = "https://gefwebapi.azurewebsites.net/api/medicamento/";
-    urlGetEstoque: string = "https://gefwebapi.azurewebsites.net/api/estoque/";
-    urlGetTipoMedicamentos: string = "https://gefwebapi.azurewebsites.net/api/tipomedicamento/";
-    urlGetViaAdministracao: string = "https://gefwebapi.azurewebsites.net/api/viaadministracao/";
-    urlGetUnidadeMedida: string ="https://gefwebapi.azurewebsites.net/api/unidademedida/";
+    urlGetMedicamentos: string = "https://localhost:44340/api/medicamento/";
+    urlGetEstoque: string = "https://localhost:44340/api/estoque/";
+    urlGetTipoMedicamentos: string = "https://localhost:44340/api/tipomedicamento/";
+    urlGetViaAdministracao: string = "https://localhost:44340/api/viaadministracao/";
+    urlGetUnidadeMedida: string ="https://localhost:44340/api/unidademedida/";
 
-    ulrPostMedicamento: string = "https://gefwebapi.azurewebsites.net/api/Medicamento";
-    urlPostItemEstoque: string= "https://gefwebapi.azurewebsites.net/api/Estoque";
-    urlPostBaixaEstoque: string= "https://gefwebapi.azurewebsites.net/api/Transacao"
+    ulrPostMedicamento: string = "https://localhost:44340/api/Medicamento";
+    urlPostItemEstoque: string= "https://localhost:44340/api/Estoque";
+    urlPostBaixaEstoque: string= "https://localhost:44340/api/Transacao"
+
+      //azure https://gefwebapi.azurewebsites.net/api/
+      // LocalHost https://localhost:44340/api/
 
     urlGetMedicamentosFake: string= "http://www.mocky.io/v2/5c36235a3000008b0021b7e5";
 
