@@ -5,6 +5,7 @@ import { MedicamentoCad } from "../farmacia/medicamento/medicamento-type";
 import { catchError} from 'rxjs/operators';
 import { ItemEstoque } from "./entrada-estoque/item-estoque";
 import { TransacaoBaixa } from "./saida-estoque/item-baixa-estoque";
+import { ParametroCad } from "../configuracao/alertas/parametro.type";
 
 @Injectable()
 export class FarmaciaApiService{
@@ -22,6 +23,9 @@ export class FarmaciaApiService{
     ulrPostMedicamento: string = "https://localhost:44340/api/Medicamento";
     urlPostItemEstoque: string= "https://localhost:44340/api/Estoque";
     urlPostBaixaEstoque: string= "https://localhost:44340/api/Transacao"
+
+    urlGetParametros : string = "https://localhost:44340/api/parametro";
+    urlPutParametro : string = "https://localhost:44340/api/parametro";
 
       //azure https://gefwebapi.azurewebsites.net/api/
       // LocalHost https://localhost:44340/api/
@@ -55,6 +59,10 @@ export class FarmaciaApiService{
 
     listarUnidadesMedida() : Observable<Response>{
       return this.http.get(this.urlGetUnidadeMedida);
+    }
+
+    listaParametros() : Observable<Response>{
+      return this.http.get(this.urlGetParametros);
     }
 
     postJSONMedicamento(medicamento: MedicamentoCad) {
@@ -108,4 +116,17 @@ export class FarmaciaApiService{
       return this.http.post(this.urlPostBaixaEstoque, params, {headers: headers});
     }
     
+    putJsonParametro(parametro : ParametroCad, idParametro : number){
+
+      var json = JSON.stringify(parametro);
+      var params = json;
+      var headers = new Headers();
+
+      console.log(json);
+
+      headers.append('Content-Type', 'application/json');
+      return this.http.put(this.urlPutParametro + "/" + idParametro, params, {headers : headers});
+
+    }
+
 }

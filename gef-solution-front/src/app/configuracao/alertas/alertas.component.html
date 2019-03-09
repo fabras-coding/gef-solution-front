@@ -29,9 +29,8 @@
 
         <div class="col-md-12 espaco-form-group">
           <div class="box-footer">
-            <a id="btnEntradaEstoque"><button class="btn btn-success pull-right" type="submit" (click)="openModal(templateMedicamento)">Salvar Parâmetros
+            <a id="btnEntradaEstoque"><button class="btn btn-success pull-right" type="submit" (click)="salvarParametros()">Salvar Parâmetros
                 </button></a>
-
 
           </div>
         </div>
@@ -42,10 +41,12 @@
 
     </div>
   </div>
-  <button type="button" id="modalSucesso" hidden (click)="openModal(templateSucessoMedicamento)"></button>
+  <button type="button" id="modalSucesso" hidden (click)="openModal(templateSucessoParametros)"></button>
+  <button type="button" id="modalErro" hidden (click)="openModal(templateErroParametros)"></button>
+
 </div>
 
-<ng-template #templateMedicamento>
+<ng-template #templateErroParametros>
 
   <div class="modal-header">
 
@@ -57,7 +58,7 @@
 
   </div>
   <div class="modal-body">
-    <h3 style="text-align: center">Parâmetros configurados com sucesso!</h3>
+    <h3 style="text-align: center">Ocorreu um erro inesperado!</h3>
     <!-- <p style="text-align: center">(O medicamento será ativado no sistema independente da decisão)</p> -->
 
   </div>
@@ -71,7 +72,7 @@
 
 </ng-template>
 
-<ng-template #templateSucessoMedicamento>
+<ng-template #templateSucessoParametros>
 
   <div class="modal-header">
 
@@ -83,7 +84,7 @@
 
   </div>
   <div class="modal-body">
-    <h3 style="text-align: center">Medicamento cadastrado com sucesso!</h3>
+    <h3 style="text-align: center">Parametros alterados com sucesso!</h3>
 
   </div>
   <div class="modal-footer">
