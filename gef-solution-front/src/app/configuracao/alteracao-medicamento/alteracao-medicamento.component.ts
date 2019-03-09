@@ -29,6 +29,7 @@ export class AlteracaoMedicamentoComponent implements OnInit {
   unidadesMedida: UnidadeMedida[] = [];
 
 
+  med: MedicamentoCad;
   idMedicamento: any;
   idViaAdministracao: any;
   idTipoMedicamento: any;
@@ -109,62 +110,29 @@ export class AlteracaoMedicamentoComponent implements OnInit {
 
   }
 
-  cadastrarMedicamento(insereEstoque: boolean) {
+  alterarMedicamento() {
 
-    this.closeModal();
-    this.globalGuid = Guid.create();
+    var medicamentoAlteracao = this.med;
 
-    var medicamentoCad = new MedicamentoCad();
+    
+    medicamentoAlteracao.tipoMedicamento.idTipoMedicamento = this.idTipoMedicamento;
+    medicamentoAlteracao.viaAdministracao.idViaAdministracao = this.idViaAdministracao  ;
+    medicamentoAlteracao.unidadeMedida.idUnidadeMedida = this.idUnidadeMedida ;
+    medicamentoAlteracao.quantidadeEstoqueCritico = this.quantidade;
+    medicamentoAlteracao.observacao =this.observacao;
 
-    var tipoMedicamento = new TipoMedicamento();
-    tipoMedicamento.idTipoMedicamento = this.idTipoMedicamento;
+    this.famarciaService.putJSONMedicamento(medicamentoAlteracao, this.idMedicamento).subscribe(
+      data => {
+        document.getElementById("modalSucesso").click();
 
-    var unidadeMedida = new UnidadeMedida();
-    unidadeMedida.idUnidadeMedida = this.idUnidadeMedida;
+      },
+      error =>{
+        console.log(error);
 
-    var viaAdministracao = new ViaAdministracao();
-    viaAdministracao.idViaAdministracao = this.idViaAdministracao;
+        document.getElementById("modalErro").click();
+      }
+    ) ;
 
-    var principioAtivo = new PrincipioAtivo();
-    principioAtivo.idPrincipioAtivo = 1; // default pra nao dar pau
-
-    medicamentoCad.guid = this.globalGuid.toString();
-
-    medicamentoCad.nomeMedicamento = this.nomeMedicamento;
-    medicamentoCad.tipoMedicamento = tipoMedicamento;
-    medicamentoCad.observacao = this.observacao;
-    medicamentoCad.cadastroCompleto = true;
-    medicamentoCad.ativo = true;
-    medicamentoCad.quantidadeEstoqueCritico = this.quantidade;
-    medicamentoCad.nomeAnvisa = this.nomeMedicamento + " _manual_";
-    medicamentoCad.principioAtivo = principioAtivo;
-    medicamentoCad.viaAdministracao = viaAdministracao;
-    medicamentoCad.unidadeMedida = unidadeMedida;
-
-
-    if (insereEstoque) {
-
-      this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
-        data => {
-          this.router.navigate(['entrada-estoque/' + this.globalGuid]);
-        },
-        error => {
-          alert(error);
-        });
-
-    }
-    else {
-
-      this.famarciaService.postJSONMedicamento(medicamentoCad).subscribe(
-        data => {
-          document.getElementById("modalSucesso").click();
-
-        },
-        error => {
-          alert(error);
-        });
-
-    }
   }
 
   redirecionaMedicamento() {
@@ -234,9 +202,10 @@ export class AlteracaoMedicamentoComponent implements OnInit {
 
   habilitaCampos() {
 
-    var med = this.medicamentos.filter((item)=> item.nomeMedicamento == this.formControlValue.replace("@","").trim())[0];
+    var medSelecionado = this.medicamentos.filter((item) => item.nomeMedicamento == this.formControlValue.replace("@", "").trim())[0];
+    this.med = medSelecionado;
 
-    if (med != undefined && med != null) {
+    if (this.med != undefined && this.med != null) {
       document.getElementById("ddlTipo").removeAttribute("disabled");
       document.getElementById("ddlViaAdministracao").removeAttribute("disabled");
       document.getElementById("ddlUnidadeMedida").removeAttribute("disabled");
@@ -245,13 +214,20 @@ export class AlteracaoMedicamentoComponent implements OnInit {
       document.getElementById("btnEntradaEstoque2").removeAttribute("disabled");
     }
 
-      this.idMedicamento = med.id;
 
-      this.idTipoMedicamento = med.tipoMedicamento.idTipoMedicamento;
-      this.idViaAdministracao = med.viaAdministracao.idViaAdministracao;
-      this.idUnidadeMedida = med.unidadeMedida.idUnidadeMedida;
-      this.quantidade = med.quantidadeEstoqueCritico;
-      this.observacao = med.observacao;
+    // this.idMedicamento = medSelecionado.id;
+    // this.med.tipoMedicamento = medSelecionado.tipoMedicamento;
+    // this.med.unidadeMedida = medSelecionado.unidadeMedida;
+    // this.med.viaAdministracao = medSelecionado.viaAdministracao;
+    // this.med.
+
+
+    this.idMedicamento = medSelecionado.id;
+    this.idTipoMedicamento = medSelecionado.tipoMedicamento.idTipoMedicamento;
+    this.idViaAdministracao = medSelecionado.viaAdministracao.idViaAdministracao;
+    this.idUnidadeMedida = medSelecionado.unidadeMedida.idUnidadeMedida;
+    this.quantidade = medSelecionado.quantidadeEstoqueCritico;
+    this.observacao = medSelecionado.observacao;
 
   }
 
