@@ -40,7 +40,7 @@
             <table id="table_estoque" class="table table-bordered dataTable" role="grid">
               <thead>
                 <tr role="row">
-                  <!-- <th>Status</th> -->
+                  <th style="width: 10px;">Situação</th>
                   <th >Nome Medicamento</th>
                   <th>Quantidade</th>
                   <th>Data de Vencimento</th>
@@ -49,7 +49,21 @@
               </thead>
               <tbody>
                 <tr *ngFor="let estoque of itensEstoquePesquisa | paginate: {itemsPerPage: 15, currentPage: p }" role="row" class="odd">
-                  <!-- <td>{{statusEstoque(estoque)}}</td> -->
+                  <td style="width: 10px;" *ngIf="(itemPertoDeVencer(estoque) && !itemVencido(estoque) ) && itemDoEstoqueCritico(estoque) "><i class='far fa-calendar-times' style="color:orange" title="Medicamento perto de vencer"></i> &nbsp;<i class="fas fa-exclamation-triangle" style="color:red" title="Medicamento em estoque crítico"></i> </td>
+                  <td style="width: 10px;" *ngIf="(!itemVencido(estoque) && !itemPertoDeVencer(estoque) ) && itemDoEstoqueCritico(estoque)"> <i class='far fa-calendar-times' style="color:green" title="Medicamento em dia"></i> &nbsp;<i class="fas fa-exclamation-triangle" style="color:red" title="Medicamento em estoque crítico"></i> </td>
+                  <td style="width: 10px;" *ngIf="itemVencido(estoque) && itemDoEstoqueCritico(estoque)"> <i class='far fa-calendar-times' style="color:red" title="Medicamento Vencido"></i> &nbsp;<i class="fas fa-exclamation-triangle" style="color:red" title="Medicamento em estoque crítico"></i> </td>
+                  
+                  <td style="width: 10px;" *ngIf="(itemPertoDeVencer(estoque) && !itemVencido(estoque) ) && !itemDoEstoqueCritico(estoque) && itemPertoDoEstoqueCritico(estoque)"><i class='far fa-calendar-times' style="color:orange" title="Medicamento perto de vencer"></i> &nbsp;<i class="fas fa-exclamation-triangle" style="color:orange" title="Próximo do Estoque Crítico"></i> </td>
+                  <td style="width: 10px;" *ngIf="(!itemVencido(estoque) && !itemPertoDeVencer(estoque) ) && !itemDoEstoqueCritico(estoque) && itemPertoDoEstoqueCritico(estoque)"> <i class='far fa-calendar-times' style="color:green" title="Medicamento em dia"></i>  &nbsp;<i class="fas fa-exclamation-triangle" style="color:orange" title="Próximo do Estoque Crítico"></i> </td>
+                  <td style="width: 10px;" *ngIf="itemVencido(estoque) && !itemDoEstoqueCritico(estoque) && itemPertoDoEstoqueCritico(estoque)"> <i class='far fa-calendar-times' style="color:red" title="Medicamento Vencido"></i>  &nbsp;<i class="fas fa-exclamation-triangle" style="color:orange" title="Próximo do Estoque Crítico"></i></td>
+                  
+                  <td style="width: 10px;" *ngIf="(itemPertoDeVencer(estoque) && !itemVencido(estoque) ) && !itemDoEstoqueCritico(estoque) && !itemPertoDoEstoqueCritico(estoque) "><i class='far fa-calendar-times' style="color:orange" title="Medicamento perto de vencer"></i> </td>
+                  <td style="width: 10px;" *ngIf="(!itemVencido(estoque) && !itemPertoDeVencer(estoque) ) && !itemDoEstoqueCritico(estoque) && !itemPertoDoEstoqueCritico(estoque)"> <i class='far fa-calendar-times' style="color:green" title="Medicamento em dia"></i> </td>
+                  <td style="width: 10px;" *ngIf="itemVencido(estoque) && !itemDoEstoqueCritico(estoque) && !itemPertoDoEstoqueCritico(estoque)"> <i class='far fa-calendar-times' style="color:red" title="Medicamento Vencido"></i> </td>
+                  
+
+
+                  <!-- <i class="fas fa-exclamation-triangle"></i> -->
                   <td>{{estoque.medicamento.nomeMedicamento}}</td>
                   <td>{{estoque.quantidadeEstoque}}</td>
                   <td>{{estoque.vencimento | date : "dd/MM/yyyy" }}</td>
@@ -62,7 +76,7 @@
 
             </table>
           </div>
-
+          <ng-template #elseBlock>Alternate text while primary text is hidden</ng-template>
         </div>
 
       </div>
