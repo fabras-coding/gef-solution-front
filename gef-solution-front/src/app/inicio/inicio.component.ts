@@ -54,7 +54,7 @@ export class InicioComponent implements OnInit {
     console.log("ITENS VENCIDOS ", itemsVencidos);
 
     if (itemsVencidos.length > 0) {
-      this.mensagemVencimento = "Você tem " + itemsVencidos.length + " item(s) vencido(s) no estoque.";
+      document.getElementById("msgVencimento").outerHTML = "Você tem "+ itemsVencidos.length +" item(s) <b>vencido(s)</b> no <a href='../estoque-geral'>estoque.</a><br/>";
     }
 
     var itensCriticos: Estoque[] = [];
@@ -64,8 +64,8 @@ export class InicioComponent implements OnInit {
       medicamentosIguais.forEach(medIgual => {
         somaMedicamentos += medIgual.quantidadeEstoque;
         if (somaMedicamentos < itenEstoque.medicamento.quantidadeEstoqueCritico) {
-          this.mensagemEstoqueCritico = "Você tem " + itemsVencidos.length + " item(s) no estoque crítico.";
-
+          // this.mensagemEstoqueCritico = "Você tem " + itemsVencidos.length + " item(s) no estoque crítico.";
+          document.getElementById("msgCritico").outerHTML = "Você tem medicamentos em quantidade <b>crítica</b> no <a href='../estoque-geral'>estoque.</a>";
         }
       });
 
