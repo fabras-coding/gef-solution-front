@@ -13,19 +13,24 @@ export class FarmaciaApiService{
   
     constructor(private http: Http){}
 
+    //url para publicacao no GEF
+    //http://localhost/gef_api/api/medicamento/"
     
-    urlGetMedicamentos: string = "https://localhost:44340/api/medicamento/";
-    urlGetEstoque: string = "https://localhost:44340/api/estoque/";
-    urlGetTipoMedicamentos: string = "https://localhost:44340/api/tipomedicamento/";
-    urlGetViaAdministracao: string = "https://localhost:44340/api/viaadministracao/";
-    urlGetUnidadeMedida: string ="https://localhost:44340/api/unidademedida/";
+    //rodando local para desenv
+    //https://localhost:44340/api/medicamento/
 
-    ulrPostMedicamento: string = "https://localhost:44340/api/Medicamento";
-    urlPostItemEstoque: string= "https://localhost:44340/api/Estoque";
-    urlPostBaixaEstoque: string= "https://localhost:44340/api/Transacao"
+    urlGetMedicamentos: string = "http://localhost/gef_api/api/medicamento/";
+    urlGetEstoque: string = "http://localhost/gef_api/api/estoque/";
+    urlGetTipoMedicamentos: string = "http://localhost/gef_api/api/tipomedicamento/";
+    urlGetViaAdministracao: string = "http://localhost/gef_api/api/viaadministracao/";
+    urlGetUnidadeMedida: string ="http://localhost/gef_api/api/unidademedida/";
 
-    urlGetParametros : string = "https://localhost:44340/api/parametro";
-    urlPutParametro : string = "https://localhost:44340/api/parametro";
+    ulrPostMedicamento: string = "http://localhost/gef_api/api/Medicamento";
+    urlPostItemEstoque: string= "http://localhost/gef_api/api/Estoque";
+    urlPostBaixaEstoque: string= "http://localhost/gef_api/api/Transacao"
+
+    urlGetParametros : string = "http://localhost/gef_api/api/parametro";
+    urlPutParametro : string = "http://localhost/gef_api/api/parametro";
 
       //azure https://gefwebapi.azurewebsites.net/api/
       // LocalHost https://localhost:44340/api/
