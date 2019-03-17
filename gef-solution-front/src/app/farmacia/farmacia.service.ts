@@ -19,18 +19,18 @@ export class FarmaciaApiService{
     //rodando local para desenv
     //https://localhost:44340/api/medicamento/
 
-    urlGetMedicamentos: string = "http://localhost/gef_api/api/medicamento/";
-    urlGetEstoque: string = "http://localhost/gef_api/api/estoque/";
-    urlGetTipoMedicamentos: string = "http://localhost/gef_api/api/tipomedicamento/";
-    urlGetViaAdministracao: string = "http://localhost/gef_api/api/viaadministracao/";
-    urlGetUnidadeMedida: string ="http://localhost/gef_api/api/unidademedida/";
+    urlGetMedicamentos: string = "http://localhost:8080/api/medicamento/";
+    urlGetEstoque: string = "http://localhost:8080/api/estoque/";
+    urlGetTipoMedicamentos: string = "http://localhost:8080/api/tipomedicamento/";
+    urlGetViaAdministracao: string = "http://localhost:8080/api/viaadministracao/";
+    urlGetUnidadeMedida: string ="http://localhost:8080/api/unidademedida/";
 
-    ulrPostMedicamento: string = "http://localhost/gef_api/api/Medicamento";
-    urlPostItemEstoque: string= "http://localhost/gef_api/api/Estoque";
-    urlPostBaixaEstoque: string= "http://localhost/gef_api/api/Transacao"
+    ulrPostMedicamento: string = "http://localhost:8080/api/Medicamento";
+    urlPostItemEstoque: string= "http://localhost:8080/api/Estoque";
+    urlPostBaixaEstoque: string= "http://localhost:8080/api/Transacao"
 
-    urlGetParametros : string = "http://localhost/gef_api/api/parametro";
-    urlPutParametro : string = "http://localhost/gef_api/api/parametro";
+    urlGetParametros : string = "http://localhost:8080/api/parametro";
+    urlPutParametro : string = "http://localhost:8080/api/parametro";
 
       //azure https://gefwebapi.azurewebsites.net/api/
       // LocalHost https://localhost:44340/api/
