@@ -27,7 +27,7 @@ export class FarmaciaApiService{
 
     ulrPostMedicamento: string = "http://localhost:8080/api/Medicamento";
     urlPostItemEstoque: string= "http://localhost:8080/api/Estoque";
-    urlPostBaixaEstoque: string= "http://localhost:8080/api/Transacao"
+    urlPostBaixaEstoque: string= "https://localhost:8080/api/Transacao"
 
     urlGetParametros : string = "http://localhost:8080/api/parametro";
     urlPutParametro : string = "http://localhost:8080/api/parametro";
